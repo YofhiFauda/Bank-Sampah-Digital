@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Bank Sampah Digital</string>
+
+    <!--  Splash Screen  -->
+    <string name="splash_screen">Splash Screen</string>
+
+    <!--  OnBoarding  -->
+    <string name="onboarding">Bank Sampah\nDigital</string>
+
 </resources>
