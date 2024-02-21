@@ -5,12 +5,35 @@
     <string name="splash_screen">Splash Screen</string>
     <string name="onboarding">Bank Sampah\nDigital</string>
 
-    <!--  OnBoarding  -->
+    <!--  Button  -->
     <string name="masuk">Masuk</string>
     <string name="daftar">Daftar</string>
+
+    <!--  Announce  -->
+    <string name="invalid_email">Format email is invalid!</string>
+    <string name="min_length_char">Minimal Length %1$d characters</string>
+    <string name="message_validation">Enter your %1$s</string>
+    <string name="login_error">Cannot Login, please check again!</string>
+    <string name="signup_error">Cannot Signup, please check again!</string>
+
+    <!--  OnBoarding  -->
     <string name="title_onboarding">Selamat datang di\nBank Sampah Digital</string>
     <string name="subtitle_onboarding">Selamatkan Bumi, Hargai Sampahmu! Berkontribusi dengan Aplikasi Bank Sampah Digital, Langkah Kecil untuk Lingkungan yang Lebih Baik.</string>
 
-    <!--    -->
+    <!--  Form Auth  -->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="konfirm_passowrd">Konfirmasi Password</string>
+
+    <!--  Registrasi  -->
+    <string name="title_registrasi">Registrasi</string>
+    <string name="subtitle_registrasi">Buat akun baru anda</string>
+    <string name="helper_register">Sudah punya akun?</string>
+
+    <!--  Registrasi  -->
+    <string name="title_login">Selamat Datang</string>
+    <string name="subtitle_login">Login menggunakan akun anda</string>
+    <string name="helper_login">Belum punya akun?</string>
 
 </resources>

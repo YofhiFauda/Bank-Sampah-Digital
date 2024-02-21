@@ -3,6 +3,7 @@
     <style name="Theme.BankSampahDigital" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>-->
     </style>
 
 </resources>

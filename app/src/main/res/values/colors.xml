@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="greenLight">#FF42B752</color> <!-- Hijau Terang -->
+    <color name="greenLight">#42B752</color> <!-- Hijau Terang -->
     <color name="greenMedium">#FF88B594</color> <!-- Hijau Sedang -->
     <color name="greenDark">#FF569C7A</color> <!-- Hijau Gelap -->
     <color name="greenDeep">#FF30522B</color> <!-- Hijau Dalam -->
