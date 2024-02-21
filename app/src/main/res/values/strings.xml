@@ -3,8 +3,14 @@
 
     <!--  Splash Screen  -->
     <string name="splash_screen">Splash Screen</string>
+    <string name="onboarding">Bank Sampah\nDigital</string>
 
     <!--  OnBoarding  -->
-    <string name="onboarding">Bank Sampah\nDigital</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar">Daftar</string>
+    <string name="title_onboarding">Selamat datang di\nBank Sampah Digital</string>
+    <string name="subtitle_onboarding">Selamatkan Bumi, Hargai Sampahmu! Berkontribusi dengan Aplikasi Bank Sampah Digital, Langkah Kecil untuk Lingkungan yang Lebih Baik.</string>
+
+    <!--    -->
 
 </resources>

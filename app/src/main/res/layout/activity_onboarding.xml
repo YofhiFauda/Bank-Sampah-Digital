@@ -4,33 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.common.onboarding.OnboardingActivity">
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_onboarding"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
-        android:contentDescription="@string/onBoarding"
+        android:contentDescription="@string/title_onboarding"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/image_onboarding" />
+        app:srcCompat="@drawable/img_onboarding" />
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/tv_titleOnboarding"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:text="@string/onBoarding"
-        android:textColor="@color/color_textPrimary"
-        android:textSize="24sp"
+        android:text="@string/title_onboarding"
+        android:textColor="@color/greenDeep"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
 
     <TextView
-        android:id="@+id/descTextView"
+        android:id="@+id/tv_subtitleOnboarding"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -47,46 +48,46 @@
         android:layout_marginEnd="15dp"
         android:lineHeight="24dp"
         android:textAlignment="center"
-        android:text="@string/onBoarding_desc"
-        android:textColor="@color/color_textPrimary"
-        android:textSize="14sp"
+        android:text="@string/subtitle_onboarding"
+        android:textColor="@color/greenDeep"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleOnboarding" />
 
-    <Button
-        android:id="@+id/loginButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="15dp"
         app:cornerRadius="8dp"
-        android:backgroundTint="@color/color_primary"
-        android:text="@string/login"
+        android:backgroundTint="@color/greenDark"
+        android:text="@string/masuk"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitleOnboarding" />
 
-    <Button
-        android:id="@+id/regisButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_registrasi"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="32dp"
-        android:textColor="@color/color_primary"
+        android:textColor="@color/greenLight"
         android:backgroundTint="@android:color/transparent"
-        android:text="@string/regis"
+        android:text="@string/daftar"
         android:textStyle="bold"
-        app:strokeColor="@color/color_primary"
+        app:strokeColor="@color/greenLight"
         app:strokeWidth="2dp"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/descTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitleOnboarding" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal"
@@ -94,7 +95,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.55540353"
+        app:layout_constraintGuide_percent="0.47879618"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
