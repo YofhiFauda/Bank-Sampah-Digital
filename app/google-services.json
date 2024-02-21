@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92778130577",
+    "project_id": "bank-sampah-digital-c2d19",
+    "storage_bucket": "bank-sampah-digital-c2d19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92778130577:android:4ad3c56097e7671c45e330",
+        "android_client_info": {
+          "package_name": "com.sampah.banksampahdigital"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv2h69rhGJSeMbfxCujQmefdLA7g2DtxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.sampah.banksampahdigital" />
+                  <option name="mobileSdkAppId" value="1:92778130577:android:4ad3c56097e7671c45e330" />
+                  <option name="projectId" value="bank-sampah-digital-c2d19" />
+                  <option name="projectNumber" value="92778130577" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
