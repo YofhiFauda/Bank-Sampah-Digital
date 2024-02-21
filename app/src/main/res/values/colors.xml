@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="primary">#FF30522B</color>
+    <color name="primary">#FF569C7A</color>
+    <color name="onPrimary">#FF30522B</color>
+
 </resources>
