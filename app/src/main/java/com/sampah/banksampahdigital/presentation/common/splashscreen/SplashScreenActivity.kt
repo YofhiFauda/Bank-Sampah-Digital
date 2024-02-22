@@ -20,7 +20,6 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
 
         binding.progressBar.visibility = View.VISIBLE
 
