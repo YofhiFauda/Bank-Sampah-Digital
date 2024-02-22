@@ -73,15 +73,18 @@
         android:textColorHint="@color/greenMedium"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/greenLight"
+        app:boxStrokeErrorColor="@color/redLight"
         app:layout_constraintTop_toBottomOf="@+id/tv_subtitleLogin">
 
         <com.sampah.banksampahdigital.presentation.custom.CustomEmail
-            android:id="@+id/ed_register_email"
+            android:id="@+id/ed_login_email"
             android:hint="@string/email"
             android:minHeight="50dp"
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="10dp"
             android:layout_width="match_parent"
+            android:textColor="@color/greenDeep"
+            android:autofillHints="emailAddress"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:textSize="14sp"
@@ -106,14 +109,16 @@
         android:textColorHint="@color/greenMedium"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/greenLight"
-        app:endIconMode="password_toggle">
+        app:boxStrokeErrorColor="@color/redLight">
 
         <com.sampah.banksampahdigital.presentation.custom.CustomPassword
-            android:id="@+id/ed_register_password"
+            android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:textColor="@color/greenDeep"
+            android:autofillHints="password"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins_medium"
             android:textSize="14sp"
@@ -155,7 +160,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:id="@+id/tv_helperRegister"
+            android:id="@+id/tv_helperLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
