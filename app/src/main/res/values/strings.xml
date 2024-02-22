@@ -35,5 +35,6 @@
     <string name="title_login">Selamat Datang</string>
     <string name="subtitle_login">Login menggunakan akun anda</string>
     <string name="helper_login">Belum punya akun?</string>
+    <string name="sign_out">Logout</string>
 
 </resources>

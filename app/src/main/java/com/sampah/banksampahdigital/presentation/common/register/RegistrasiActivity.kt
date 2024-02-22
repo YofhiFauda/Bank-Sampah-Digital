@@ -1,11 +1,8 @@
 package com.sampah.banksampahdigital.presentation.common.register
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +23,7 @@ class RegistrasiActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         register()
         setupAction()
@@ -57,21 +55,59 @@ class RegistrasiActivity : AppCompatActivity() {
                     if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
                         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                             if (password == konfirmPassword){
-                                if (it.isSuccessful){
-                                    AlertDialog.Builder(this@RegistrasiActivity).apply {
-                                        setTitle("Yeah!")
-                                        setMessage("Your account successfully created!")
-                                        setPositiveButton("Next") { _, _ ->
-                                            finish()
-                                        }
-                                        create()
-                                        show()
+                                if (it.isSuccessful) {
+                                    val currentUser = firebaseAuth.currentUser
+                                    val user = hashMapOf(
+                                        "username" to username,
+                                        "email" to email
+                                        // Tambahkan field tambahan sesuai kebutuhan
+                                    )
+
+                                    if (currentUser != null) {
+                                        val db = FirebaseFirestore.getInstance()
+
+                                        // Buat dokumen baru dengan menggunakan UID pengguna sebagai kunci
+                                        db.collection("users").document(currentUser.uid)
+                                            .get()
+                                            .addOnSuccessListener { document ->
+                                                // Periksa apakah dokumen sudah ada
+                                                if (document.exists()) {
+                                                    // Dokumen sudah ada, mungkin ada tindakan yang perlu diambil
+                                                    // Misalnya, memberikan pesan bahwa pengguna sudah terdaftar
+                                                    Toast.makeText(this, "User already registered!", Toast.LENGTH_SHORT).show()
+                                                } else {
+                                                    // Dokumen tidak ada, simpan data pengguna ke Firestore
+                                                    db.collection("users").document(currentUser.uid)
+                                                        .set(user)
+                                                        .addOnSuccessListener {
+                                                            // Tampilkan pesan sukses
+                                                            AlertDialog.Builder(this@RegistrasiActivity).apply {
+                                                                setTitle("Yeah!")
+                                                                setMessage("Your account successfully created!")
+                                                                setPositiveButton("Next") { _, _ ->
+                                                                    finish()
+                                                                }
+                                                                create()
+                                                                show()
+                                                            }
+                                                        }
+                                                        .addOnFailureListener { e ->
+                                                            // Tampilkan pesan gagal jika data tidak dapat disimpan di Firestore
+                                                            Toast.makeText(this, "Failed to save user data: ${e.message}", Toast.LENGTH_SHORT).show()
+                                                        }
+                                                }
+                                            }
+                                            .addOnFailureListener { e ->
+                                                // Tampilkan pesan gagal jika gagal mengambil dokumen
+                                                Toast.makeText(this, "Failed to check existing user: ${e.message}", Toast.LENGTH_SHORT).show()
+                                            }
                                     }
+                                } else {
+                                    // Gagal mendaftarkan pengguna
+                                    Toast.makeText(this, "Failed to register user: ${it.exception?.message}", Toast.LENGTH_SHORT).show()
                                 }
-                                else {
-                                    Toast.makeText(this, "Please Try Again", Toast.LENGTH_SHORT).show()
-                                }
-                            }else{
+                            }
+                            else {
                                 Toast.makeText(this, "Please create same password", Toast.LENGTH_SHORT).show()
                             }
                         }

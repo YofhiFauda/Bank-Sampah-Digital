@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sampah.banksampahdigital.MainActivity
+import com.sampah.banksampahdigital.presentation.common.MainActivity
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.ActivityLoginBinding
 import com.sampah.banksampahdigital.presentation.common.register.RegistrasiActivity
