@@ -46,6 +46,12 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         firebaseAuth.addAuthStateListener(authStateListener)
     }
+
+    override fun onStop() {
+        super.onStop()
+        firebaseAuth.removeAuthStateListener(authStateListener)
+    }
+
     private fun setupAction(){
         binding.tvDaftar.setOnClickListener {
             startActivity(Intent(this, RegistrasiActivity::class.java))

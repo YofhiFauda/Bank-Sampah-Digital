@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.databinding.ActivityRegistrasiBinding
@@ -81,15 +80,8 @@ class RegistrasiActivity : AppCompatActivity() {
                                                         .set(user)
                                                         .addOnSuccessListener {
                                                             // Tampilkan pesan sukses
-                                                            AlertDialog.Builder(this@RegistrasiActivity).apply {
-                                                                setTitle("Yeah!")
-                                                                setMessage("Your account successfully created!")
-                                                                setPositiveButton("Next") { _, _ ->
-                                                                    finish()
-                                                                }
-                                                                create()
-                                                                show()
-                                                            }
+                                                            Toast.makeText(this@RegistrasiActivity, "Your account successfully created!", Toast.LENGTH_SHORT).show()
+
                                                         }
                                                         .addOnFailureListener { e ->
                                                             // Tampilkan pesan gagal jika data tidak dapat disimpan di Firestore
