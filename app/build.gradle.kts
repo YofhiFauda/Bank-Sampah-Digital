@@ -39,6 +39,18 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            // Direktori layout default
+            res.srcDirs("src/main/res")
+
+            // Tambahkan direktori layout khusus untuk pengguna (user)
+            res.srcDirs("src/main/res/layout/user")
+
+            // Tambahkan direktori layout khusus untuk admin
+            res.srcDirs("src/main/res/layout/admin")
+        }
+    }
 }
 
 dependencies {
@@ -60,11 +72,14 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation ("androidx.annotation:annotation:1.7.1")
 
     // Room
     implementation ("androidx.room:room-ktx:2.6.1")
     implementation ("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
     //coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

@@ -1,58 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".presentation.common.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:navGraph="@navigation/nav_graph" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="20sp"
-        android:textColor="@color/greenMedium" />
+        android:layout_gravity="bottom"
+        android:elevation="1dp"
+        app:itemIconTint="@color/nav_icon_color_state"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="selected"
+        app:itemPaddingBottom="15dp"
+        app:itemTextColor="@color/nav_icon_color_state"
+        app:itemIconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation" />
 
-    <TextView
-        android:id="@+id/tv_uidUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp" />
-
-
-    <TextView
-        android:id="@+id/tv_nameUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:id="@+id/tv_emailUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="20sp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginHorizontal="20dp"
-        android:backgroundTint="@color/greenMedium"
-        android:text="@string/sign_out"
-        android:fontFamily="@font/poppins_medium"
-        android:minHeight="50dp"
-        app:cornerRadius="8dp"
-        android:textAllCaps="true"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

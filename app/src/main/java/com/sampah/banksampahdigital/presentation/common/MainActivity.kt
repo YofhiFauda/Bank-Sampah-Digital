@@ -1,26 +1,28 @@
 package com.sampah.banksampahdigital.presentation.common
 
-import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import androidx.core.view.forEach
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.ActivityMainBinding
-import com.sampah.banksampahdigital.presentation.common.login.LoginActivity
 import com.sampah.banksampahdigital.presentation.common.onboarding.OnboardingActivity
-
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,45 +36,59 @@ class MainActivity : AppCompatActivity() {
                 redirectToLoginScreen()
             }
         }
-        setupView()
+
+
+
+    }
+    private fun setupNavController() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            updateBottomNavigationIcons(destination.id)
+        }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun setupView() {
-        val userId  = firebaseAuth.currentUser
+    private fun setupBottomNavigationView() {
+        bottomNavigationView = binding.bottomNavigation
+        bottomNavigationView.setupWithNavController(navController)
+    }
 
-        if (userId != null) {
-            // Mengambil data pengguna dari Firestore berdasarkan ID pengguna
-            firestore.collection("users").document(userId.uid)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        // Dokumen ditemukan, ambil data pengguna
-                        val username = document.getString("username")
-                        val email = document.getString("email")
+    private fun updateBottomNavigationIcons(destinationId: Int) {
+        if (!::bottomNavigationView.isInitialized) return
 
-                        binding.tvUidUser.text = "UID: ${userId.uid}"
-                        binding.tvNameUser.text = "Username: $username"
-                        binding.tvEmailUser.text = "Email: $email"
+        val homeIcon = R.drawable.icon_home_enable
+        val trashIcon = R.drawable.icon_jemput_enable
+        val categoryIcon = R.drawable.icon_category_enable
+        val historyIcon = R.drawable.icon_riwayat_enable
+        val profileIcon = R.drawable.icon_person_enable
 
+        val icons = mapOf(
+            R.id.homeFragment to homeIcon,
+            R.id.trashFragment to trashIcon,
+            R.id.categoryFragment to categoryIcon,
+            R.id.historyFragment to historyIcon,
+            R.id.profileragment to profileIcon
+        )
 
-                        // Lakukan apa pun dengan data pengguna yang diperoleh
-                        Log.d(TAG, "Username: $username, Email: $email")
-                    } else {
-                        Log.d(TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    // Gagal mengambil data pengguna
-                    Log.d(TAG, "get failed with ", exception)
-                }
-        }
-
-            binding.signoutButton.setOnClickListener {
-                firebaseAuth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+        bottomNavigationView.menu.forEach { menuItem ->
+            val iconId = if (menuItem.itemId == destinationId) {
+                icons[menuItem.itemId] ?: return@forEach
+            } else {
+                getDisabledIcon(menuItem.itemId)
             }
+            menuItem.setIcon(iconId)
+        }
+    }
+
+    private fun getDisabledIcon(itemId: Int): Int {
+        return when (itemId) {
+            R.id.homeFragment -> R.drawable.icon_home_disable
+            R.id.trashFragment -> R.drawable.icon_jemput_disable
+            R.id.categoryFragment -> R.drawable.icon_category_disable
+            R.id.historyFragment -> R.drawable.icon_riwayat_disable
+            R.id.profileragment -> R.drawable.icon_person_disable
+            else -> throw IllegalArgumentException("Unknown itemId: $itemId")
+        }
     }
 
     private fun redirectToLoginScreen() {
@@ -90,9 +106,5 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         firebaseAuth.removeAuthStateListener(authStateListener)
-    }
-
-    companion object {
-        private const val TAG = "MainActivity"
     }
 }

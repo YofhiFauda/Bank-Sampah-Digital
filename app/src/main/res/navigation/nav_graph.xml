@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sampah.banksampahdigital.presentation.user.dashboard.DashboardFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/trashFragment"
+        android:name="com.sampah.banksampahdigital.presentation.user.sampah.SampahFragment"
+        android:label="fragment_trash"
+        tools:layout="@layout/fragment_sampah" />
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.sampah.banksampahdigital.presentation.user.kategori.KategoriFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_kategori" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.sampah.banksampahdigital.presentation.user.riwayat.RiwayatFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_riwayat" />
+
+    <fragment
+        android:id="@+id/profileragment"
+        android:name="com.sampah.banksampahdigital.presentation.user.profile.ProfileFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
