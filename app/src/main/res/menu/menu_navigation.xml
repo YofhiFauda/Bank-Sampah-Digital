@@ -4,26 +4,26 @@
         android:id="@+id/action_dashboard"
         android:title="@string/dashboard"
         android:enabled="true"
-        android:icon="@drawable/icon_home_enable" />
+        android:icon="@drawable/nav_home_state" />
     <item
         android:id="@+id/action_sampah"
         android:title="@string/sampah"
         android:enabled="true"
-        android:icon="@drawable/icon_jemput_disable"/>
+        android:icon="@drawable/nav_sampah_state"/>
     <item
         android:id="@+id/action_category"
         android:title="@string/kategori"
         android:enabled="true"
-        android:icon="@drawable/icon_category_disable"/>
+        android:icon="@drawable/nav_kategori_state"/>
 
     <item
         android:id="@+id/action_report"
         android:title="@string/riwayat"
         android:enabled="true"
-        android:icon="@drawable/icon_riwayat_disable"/>
+        android:icon="@drawable/nav_riwayat_state"/>
     <item
         android:id="@+id/action_setting"
         android:title="@string/profile"
         android:enabled="true"
-        android:icon="@drawable/icon_person_disable"/>
+        android:icon="@drawable/nav_profile_state"/>
 </menu>

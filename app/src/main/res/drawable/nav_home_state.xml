@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item android:drawable="@drawable/icon_home_enable" android:state_checked="true"/>
+    <!-- Default state when icon is disabled -->
+    <item android:drawable="@drawable/icon_home_disable" />
 </selector>

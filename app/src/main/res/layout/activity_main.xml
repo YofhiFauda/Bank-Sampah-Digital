@@ -27,6 +27,7 @@
         android:elevation="1dp"
         app:itemIconTint="@color/nav_icon_color_state"
         app:itemBackground="@color/white"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
         app:labelVisibilityMode="selected"
         app:itemPaddingBottom="15dp"
         app:itemTextColor="@color/nav_icon_color_state"
