@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Bank Sampah Digital"
 include(":app")
+include(":core")

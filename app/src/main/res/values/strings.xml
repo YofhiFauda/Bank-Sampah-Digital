@@ -2,48 +2,76 @@
     <string name="app_name">Bank Sampah Digital</string>
 
     <!--  Splash Screen  -->
-    <string name="splash_screen">Splash Screen</string>
-    <string name="onboarding">Bank Sampah\nDigital</string>
+    <string name="splash_screen" translatable="false">Splash Screen</string>
+    <string name="onboarding" translatable="false">Bank Sampah\nDigital</string>
 
     <!--  Button  -->
-    <string name="masuk">Masuk</string>
-    <string name="daftar">Daftar</string>
+    <string name="masuk" translatable="false">Masuk</string>
+    <string name="daftar" translatable="false">Daftar</string>
 
     <!--  Announce  -->
-    <string name="invalid_email">Format email is invalid!</string>
-    <string name="min_length_char">Minimal Length %1$d characters</string>
-    <string name="message_validation">Enter your %1$s</string>
-    <string name="login_error">Cannot Login, please check again!</string>
-    <string name="signup_error">Cannot Signup, please check again!</string>
+    <string name="invalid_email" translatable="false">Format email is invalid!</string>
+    <string name="min_length_char" translatable="false">Minimal Length %1$d characters</string>
+    <string name="message_validation" translatable="false">Enter your %1$s</string>
+    <string name="login_error" translatable="false">Cannot Login, please check again!</string>
+    <string name="signup_error" translatable="false">Cannot Signup, please check again!</string>
 
     <!--  OnBoarding  -->
-    <string name="title_onboarding">Selamat datang di\nBank Sampah Digital</string>
-    <string name="subtitle_onboarding">Selamatkan Bumi, Hargai Sampahmu! Berkontribusi dengan Aplikasi Bank Sampah Digital, Langkah Kecil untuk Lingkungan yang Lebih Baik.</string>
+    <string name="title_onboarding" translatable="false">Selamat datang di\nBank Sampah Digital</string>
+    <string name="subtitle_onboarding" translatable="false">Selamatkan Bumi, Hargai Sampahmu! Berkontribusi dengan Aplikasi Bank Sampah Digital, Langkah Kecil untuk Lingkungan yang Lebih Baik.</string>
 
     <!--  Form Auth  -->
-    <string name="username">Username</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="konfirm_passowrd">Konfirmasi Password</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="konfirm_passowrd" translatable="false">Konfirmasi Password</string>
 
     <!--  Registrasi  -->
-    <string name="title_registrasi">Registrasi</string>
-    <string name="subtitle_registrasi">Buat akun baru anda</string>
-    <string name="helper_register">Sudah punya akun?</string>
+    <string name="title_registrasi" translatable="false">Registrasi</string>
+    <string name="subtitle_registrasi" translatable="false">Buat akun baru anda</string>
+    <string name="helper_register" translatable="false">Sudah punya akun?</string>
 
-    <!--  Registrasi  -->
-    <string name="title_login">Selamat Datang</string>
-    <string name="subtitle_login">Login menggunakan akun anda</string>
-    <string name="helper_login">Belum punya akun?</string>
-    <string name="sign_out">Logout</string>
+    <!--  Login  -->
+    <string name="title_login" translatable="false">Selamat Datang</string>
+    <string name="subtitle_login" translatable="false">Login menggunakan akun anda</string>
+    <string name="helper_login" translatable="false">Belum punya akun?</string>
+    <string name="sign_out" translatable="false">Logout</string>
 
     <!--  Navigation Bar  -->
-    <string name="dashboard">Dashboard</string>
-    <string name="sampah">Sampah</string>
-    <string name="kategori">Kategori</string>
-    <string name="riwayat">Riwayat</string>
-    <string name="profile">Profile</string>
+    <string name="dashboard" translatable="false">Dashboard</string>
+    <string name="sampah" translatable="false">Sampah</string>
+    <string name="kategori" translatable="false">Kategori</string>
+    <string name="riwayat" translatable="false">Riwayat</string>
+    <string name="profile" translatable="false">Profile</string>
+
+    <!--  Dashboard Content  -->
+    <string name="total_pengiriman" translatable="false">Total Pengiriman</string>
+    <string name="total_saldo" translatable="false">Saldo Anda</string>
+
+    <string name="title_slider1" translatable="false">Selamat datang di\nAplikasi Bank Sampah!</string>
+    <string name="subtitle_slider1" translatable="false">Mulailah Menabung Sampah Anda, dan Bersama-sama Kita Mengubah Dunia Menjadi Tempat yang Lebih Bersih</string>
+
+    <string name="title_slider2" translatable="false">Aksi Kecil Dampak Besar!</string>
+    <string name="subtitle_slider2" translatable="false">Setiap Aksi Kecil yang Anda Lakukan Hari Ini Akan Membawa Dampak yang Luar Biasa untuk Generasi Mendatang!</string>
+
+    <string name="title_slider3" translatable="false">Tukarkan Poin Anda, Dapatkan Manfaat Lebih</string>
+    <string name="subtitle_slider3" translatable="false">Tukarkan Poin Anda dengan Barang Berguna atau Uang Tunai, Menjadi Reward untuk Kontribusi Anda terhadap Lingkungan!"</string>
+
+    <string name="title_slider4" translatable="false">Sampah Bukan Akhir Tapi Awal yang Berharga!</string>
+    <string name="subtitle_slider4" translatable="false">Sampah Bukanlah Akhir dari Perjalanan, Tetapi Awal yang Berharga untuk Menciptakan Masa Depan yang Lebih Berkelanjutan dan Hijau!</string>
+
+    <string name="title_slider5" translatable="false">Tukarkan Sampah Plastikmu Sekarang!</string>
+    <string name="subtitle_slider5" translatable="false">Aplikasi Bank Sampah adalah solusi untuk menyelesaikan masalah sosial tentang kebersihan lingkungan </string>
+
+    <string name="contoh_total_pengiriman" translatable="false">100 Pengiriman</string>
+    <string name="contoh_total_saldo" translatable="false">Rp.100.000</string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_admin" translatable="false">Admin</string>
+    <string name="title_user" translatable="false">User</string>
+
 
 </resources>

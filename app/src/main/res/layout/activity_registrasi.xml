@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.common.register.RegistrasiActivity">
+    tools:context=".common.register.RegistrasiActivity">
 
 
     <!--  Start of Title  -->
@@ -15,7 +15,6 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:lineHeight="60dp"
         android:text="@string/title_registrasi"
         android:textColor="@color/greenDeep"
         android:textSize="32sp"
@@ -62,7 +61,7 @@
         app:boxStrokeErrorColor="@color/redLight"
         app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomUsername
+        <com.sampah.banksampahdigital.custom.CustomUsername
             android:id="@+id/ed_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,7 +95,7 @@
         app:boxStrokeErrorColor="@color/redLight"
         app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomEmail
+        <com.sampah.banksampahdigital.custom.CustomEmail
             android:id="@+id/ed_register_email"
             android:hint="@string/email"
             android:minHeight="50dp"
@@ -131,7 +130,7 @@
         app:boxStrokeColor="@color/greenLight"
         app:boxStrokeErrorColor="@color/redLight">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomPassword
+        <com.sampah.banksampahdigital.custom.CustomPassword
             android:id="@+id/ed_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,7 +164,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomPassword
+        <com.sampah.banksampahdigital.custom.CustomPassword
             android:id="@+id/ed_register_konfirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

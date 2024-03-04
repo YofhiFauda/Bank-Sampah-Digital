@@ -7,31 +7,35 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sampah.banksampahdigital.presentation.user.dashboard.DashboardFragment"
+        android:name="com.sampah.banksampahdigital.user.dashboard.DashboardFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/trashFragment"
-        android:name="com.sampah.banksampahdigital.presentation.user.sampah.SampahFragment"
+        android:name="com.sampah.banksampahdigital.user.trash.TrashFragment"
         android:label="fragment_trash"
-        tools:layout="@layout/fragment_sampah" />
+        tools:layout="@layout/fragment_trash">
+        <action
+            android:id="@+id/action_sampah"
+            app:destination="@id/trashFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.sampah.banksampahdigital.presentation.user.kategori.KategoriFragment"
+        android:name="com.sampah.banksampahdigital.user.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_kategori" />
+        tools:layout="@layout/fragment_category" />
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.sampah.banksampahdigital.presentation.user.riwayat.RiwayatFragment"
+        android:name="com.sampah.banksampahdigital.user.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_riwayat" />
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/profileragment"
-        android:name="com.sampah.banksampahdigital.presentation.user.profile.ProfileFragment"
+        android:name="com.sampah.banksampahdigital.user.profile.ProfileFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_profile" />
 

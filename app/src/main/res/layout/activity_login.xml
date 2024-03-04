@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.common.login.LoginActivity">
+    tools:context=".common.login.LoginActivity">
 
     <!--  Start of Image  -->
     <ImageView
@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:lineHeight="60dp"
         android:text="@string/title_login"
         android:textColor="@color/greenDeep"
         android:textSize="32sp"
@@ -76,7 +75,7 @@
         app:boxStrokeErrorColor="@color/redLight"
         app:layout_constraintTop_toBottomOf="@+id/tv_subtitleLogin">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomEmail
+        <com.sampah.banksampahdigital.custom.CustomEmail
             android:id="@+id/ed_login_email"
             android:hint="@string/email"
             android:minHeight="50dp"
@@ -97,7 +96,7 @@
     <!--  Start of TextInput Layout Password  -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordEditTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -111,7 +110,7 @@
         app:boxStrokeColor="@color/greenLight"
         app:boxStrokeErrorColor="@color/redLight">
 
-        <com.sampah.banksampahdigital.presentation.custom.CustomPassword
+        <com.sampah.banksampahdigital.custom.CustomPassword
             android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
