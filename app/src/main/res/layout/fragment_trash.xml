@@ -1,14 +1,436 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".user.trash.TrashFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
-</FrameLayout>
+
+    <!--  Start of Title Jemput Sampah  -->
+    <TextView
+        android:id="@+id/tv_titleJemputSampah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/title_jemputSampah"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/greenDeep"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <!--  End of Title Jemput Sampah  -->
+
+    <!--  Start of Warning Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_warningJemputSampah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        app:cardBackgroundColor="@color/greenDark"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleJemputSampah">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <!-- Title -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_outline_error_outline_24"
+                android:contentDescription="@string/warning_jemputSampah"/>
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/tv_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/warning_jemputSampah"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/poppins"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!--  End of Warning Card -->
+
+    <!--  Start of Layout Nama Pengguna  -->
+    <LinearLayout
+        android:id="@+id/layout_namaPengguna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_warningJemputSampah"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_titleNamaPengguna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_namaPengguna"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/namaPenggunaEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_namaPengguna"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/hint_namaPengguna"
+                android:textColorHint="@color/greenMedium"
+                android:minHeight="50dp"
+                android:background="@drawable/bg_textfield_outlined"
+                android:layout_width="match_parent"
+                android:textColor="@color/greenDeep"
+                android:autofillHints="name"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                android:ems="10"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout Nama Pengguna  -->
+
+    <!--  Start of Layout Kategori Sampah  -->
+    <LinearLayout
+        android:id="@+id/layout_kategoriSampah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_namaPengguna">
+
+        <TextView
+            android:id="@+id/tv_titleKategoriSampah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_kategoriSampah"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/kategoriSampahEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinner_kategoriSampah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="@drawable/bg_textfield_outlined"
+                android:paddingStart="10dp"
+                android:minHeight="50dp"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <!--  End of Layout Kategori Sampah  -->
+
+    <!--  Start of Layout Berat Sampah  -->
+    <LinearLayout
+        android:id="@+id/layout_beratSampah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/layout_kategoriSampah"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_beratSampah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_beratSampah"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/beratSampahEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_beratSampah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/greenMedium"
+                android:hint="@string/hint_beratSampah"
+                android:minHeight="50dp"
+                android:background="@drawable/bg_textfield_outlined"
+                android:textColor="@color/greenDeep"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                android:ems="10"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout Berat Sampah  -->
+
+    <!--  Start of Layout Harga Sampah  -->
+    <LinearLayout
+        android:id="@+id/layout_hargaSampah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_kategoriSampah"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical">
+
+        <TextView
+            android:id="@+id/tv_hargaSampah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_hargaSampah"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hargaSampahEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:hintEnabled="false">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="5dp"
+                android:padding="18dp"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/bg_textfield_outlined"
+                android:text="@string/hint_hargaSampah"
+                android:textColor="@color/greenDeep"
+                android:minHeight="50dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout Harga Sampah  -->
+
+
+    <!--  Start of Layout Tanggal Penjemputan  -->
+    <LinearLayout
+        android:id="@+id/layout_tanggalPenjemputan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_hargaSampah"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_tanggalPenjemputan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_tanggalJemput"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tanggalPenjemputanEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_tanggalPenjemputan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/hint_tanggalJemput"
+                android:textColorHint="@color/greenMedium"
+                android:minHeight="50dp"
+                android:background="@drawable/bg_textfield_outlined"
+                android:textColor="@color/greenDeep"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                android:ems="10"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout Tanggal Penjemputan  -->
+
+    <!--  Start of Layout Alamat Penjemputan  -->
+    <LinearLayout
+        android:id="@+id/layout_alamatPenjemputan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_tanggalPenjemputan"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_alamatPenjemputan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_alamatJemput"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/alamatPenjemputanEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_alamatPenjemputan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/hint_alamatJemput"
+                android:minHeight="50dp"
+                android:textColorHint="@color/greenMedium"
+                android:background="@drawable/bg_textfield_outlined"
+                android:textColor="@color/greenDeep"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                android:ems="10"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout alamat Penjemputan  -->
+
+
+    <!--  Start of Layout Catatan Tambahan  -->
+    <LinearLayout
+        android:id="@+id/layout_catatanTambahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_alamatPenjemputan"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_catatanTambahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_catatan"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/catatanTambahanEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_catatanTambahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/hint_catatan"
+                android:minHeight="50dp"
+                android:textColorHint="@color/greenMedium"
+                android:background="@drawable/bg_textfield_outlined"
+                android:textColor="@color/greenDeep"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                android:ems="10"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <!--  End of Layout Catatan Tambahan  -->
+
+    <!--  Start of Button Register  -->
+    <Button
+        android:id="@+id/btn_simpan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/greenDark"
+        android:text="@string/simpan"
+        android:minHeight="50dp"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_catatanTambahan" />
+    <!--  End of Button Register  -->
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -66,7 +66,31 @@
     <string name="contoh_total_pengiriman" translatable="false">100 Pengiriman</string>
     <string name="contoh_total_saldo" translatable="false">Rp.100.000</string>
 
+    <!--  Jemput Sampah Content  -->
+    <string name="title_jemputSampah" translatable="false">Jemput Sampah</string>
+    <string name="warning_jemputSampah" translatable="false">Mohon isi data di bawah ini dengan benar</string>
 
+    <string name="title_namaPengguna" translatable="false">Nama Pengguna</string>
+    <string name="hint_namaPengguna" translatable="false">Masukan Nama Lengkap</string>
+
+    <string name="title_kategoriSampah" translatable="false">Kategori Sampah</string>
+
+    <string name="title_beratSampah" translatable="false">Berat (kg)</string>
+    <string name="hint_beratSampah" translatable="false">5 Kg</string>
+
+    <string name="title_hargaSampah" translatable="false">Harga (per kg)</string>
+    <string name="hint_hargaSampah" translatable="false">Rp 3.000</string>
+
+    <string name="title_tanggalJemput" translatable="false">Tanggal Penjemputan</string>
+    <string name="hint_tanggalJemput" translatable="false">Masukan Tanggal</string>
+
+    <string name="title_alamatJemput" translatable="false">Alamat Penjemputan</string>
+    <string name="hint_alamatJemput" translatable="false">Masukan Alamat</string>
+
+    <string name="title_catatan" translatable="false">Catatan Tambahan (Opsional)</string>
+    <string name="hint_catatan" translatable="false">Masukan Catatan Tambahan Anda</string>
+
+    <string name="simpan" translatable="false">Simpan</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

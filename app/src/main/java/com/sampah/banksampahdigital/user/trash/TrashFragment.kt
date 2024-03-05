@@ -5,56 +5,84 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.R
+import com.sampah.banksampahdigital.databinding.FragmentDashboardBinding
+import com.sampah.banksampahdigital.databinding.FragmentTrashBinding
+import com.sampah.banksampahdigital.utils.Utils.showToast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TrashFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TrashFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentTrashBinding? = null
+    private val binding get() = _binding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var firestore: FirebaseFirestore
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentTrashBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        buatJemputSampah()
+    }
+
+    private fun buatJemputSampah() {
+        binding?.btnSimpan?.setOnClickListener {
+            val namaPengguna = binding?.tvTitleNamaPengguna?.text.toString()
+            val kategoriSampah = binding?.spinnerKategoriSampah?.selectedItem.toString()
+            val beratSampah = binding?.edBeratSampah?.text.toString()
+            val tanggalPenjemputan = binding?.edTanggalPenjemputan?.text.toString()
+            val alamatPenjemputan = binding?.edAlamatPenjemputan?.text.toString()
+            val catatan = binding?.edCatatanTambahan?.text.toString()
+
+            when {
+                namaPengguna.isEmpty() -> {
+                    binding?.edNamaPengguna?.error = "Mohon lengkapi nama anda dahulu"
+                }
+                kategoriSampah.isEmpty() -> {
+                    showToast(requireActivity(), "Mohon pilih jenis sampah anda")
+                }
+                beratSampah.isEmpty() -> {
+                    binding?.edBeratSampah?.error = "Mohon isi berat sampah anda"
+                }
+                tanggalPenjemputan.isEmpty() -> {
+                    binding?.edTanggalPenjemputan?.error = "Mohon masukan tanggal penjemputan"
+                }
+                alamatPenjemputan.isEmpty() -> {
+                    binding?.edAlamatPenjemputan?.error = "Mohon masukan alamat anda"
+                }
+                else -> {
+                    if(namaPengguna.isNotEmpty() && kategoriSampah.isNotEmpty() && beratSampah.isNotEmpty() && tanggalPenjemputan.isNotEmpty() && alamatPenjemputan.isNotEmpty()){
+                        val currentUser = firebaseAuth.currentUser
+
+                        val jemputSampah = hashMapOf(
+                            "Nama Pengguna" to namaPengguna,
+                            "Kategori Sampah" to kategoriSampah,
+                            "Berat Sampah" to beratSampah,
+                            "Tanggal Penjemputan" to tanggalPenjemputan,
+                            "Alamat Penjemputan" to alamatPenjemputan,
+                            "Catatan" to catatan,
+                        )
+                    }
+                    else {
+                        showToast(requireActivity(), "Mohon lengkapi data di atas ")
+                    }
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trash, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TrashFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TrashFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
