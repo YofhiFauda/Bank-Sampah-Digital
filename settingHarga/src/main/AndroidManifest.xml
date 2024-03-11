@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <activity
+            android:name=".ui.UpdateSettingHargaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AddSettingHargaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SettingHargaActivity"
+            android:exported="false" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
 </manifest>
