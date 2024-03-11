@@ -238,6 +238,7 @@
             app:hintEnabled="false">
 
             <TextView
+                android:id="@+id/tv_contohHargaSampah"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -294,13 +295,16 @@
                 android:hint="@string/hint_tanggalJemput"
                 android:textColorHint="@color/greenMedium"
                 android:minHeight="50dp"
+                android:drawableStart="@drawable/ic_baseline_date_range_24"
+                android:drawablePadding="10dp"
                 android:background="@drawable/bg_textfield_outlined"
                 android:textColor="@color/greenDeep"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="14sp"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="date"
                 tools:ignore="SpeakableTextPresentCheck" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

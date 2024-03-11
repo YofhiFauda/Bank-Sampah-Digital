@@ -53,6 +53,7 @@ android {
 dependencies {
 
     implementation (project(":core"))
+    implementation(project(":settingHarga"))
     implementation (fileTree("libs").include("*jar"))
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

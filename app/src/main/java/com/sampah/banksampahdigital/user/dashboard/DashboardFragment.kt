@@ -53,7 +53,59 @@ class DashboardFragment : Fragment() {
         }
         setDashboard()
         setListCarousel()
+        getTotalPengirimanDanPendapatan()
     }
+
+    private fun getTotalPengirimanDanPendapatan() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users")
+                .document(currentUser.uid)
+                .collection("TrashSent")
+                .get()
+                .addOnSuccessListener { documents ->
+                    var totalPengiriman = 0
+                    var totalPendapatan = 0.0
+
+                    for (document in documents) {
+                        // Hitung total pengiriman
+                        totalPengiriman++
+
+                        // Ambil nilai pendapatan dari dokumen
+                        val pendapatanField = document.getString("Pendapatan")
+
+                        // Konversi nilai pendapatan dari string ke double jika tidak null atau kosong
+                        if (!pendapatanField.isNullOrEmpty()) {
+                            try {
+                                val pendapatan = pendapatanField.toDouble()
+                                totalPendapatan += pendapatan
+                            } catch (e: NumberFormatException) {
+                                Log.e("TAG", "Invalid Pendapatan value in document: ${document.id}")
+                                // Tambahkan penanganan kesalahan di sini jika diperlukan
+                            }
+                        } else {
+                            Log.e("TAG", "Pendapatan field is empty or null in document: ${document.id}")
+                            // Tambahkan penanganan kesalahan di sini jika diperlukan
+                        }
+                    }
+
+                    val totalPendapatanFormat = String.format("Rp %,.3f", totalPendapatan)
+                    val totalPengirimanFormat = String.format("$totalPengiriman Pengiriman")
+
+                    // Lakukan sesuatu dengan total pengiriman dan total pendapatan, misalnya tampilkan atau simpan
+                    Log.d("TAG", "Total Pengiriman: $totalPengiriman")
+                    binding?.tvTotalPengiriman?.text = totalPengirimanFormat
+
+
+                    Log.d("TAG", "Total Pendapatan: $totalPendapatan")
+                    binding?.tvTotalPendapatan?.text = totalPendapatanFormat
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("TAG", "Error getting documents: ", exception)
+                }
+        }
+    }
+
 
     private fun setListCarousel() {
         // Inisialisasi RecyclerView
@@ -69,15 +121,20 @@ class DashboardFragment : Fragment() {
         autoScrollTimer?.schedule(object : TimerTask() {
             override fun run() {
                 requireActivity().runOnUiThread {
-                    val layoutManager = binding?.rvCarausel?.layoutManager as LinearLayoutManager
-                    val currentPosition = layoutManager.findFirstVisibleItemPosition()
-                    val nextPosition =
-                        if (currentPosition == carouselItems.size - 1) 0 else currentPosition + 1
-                    binding?.rvCarausel?.smoothScrollToPosition(nextPosition)
+                    val layoutManager = binding?.rvCarausel?.layoutManager
+                    if (layoutManager is LinearLayoutManager) {
+                        val currentPosition = layoutManager.findFirstVisibleItemPosition()
+                        val nextPosition =
+                            if (currentPosition == carouselItems.size - 1) 0 else currentPosition + 1
+                        binding?.rvCarausel?.smoothScrollToPosition(nextPosition)
+                    } else {
+                        Log.e("TAG", "Layout manager is not LinearLayoutManager")
+                    }
                 }
             }
         }, autoScrollDelay, autoScrollDelay)
     }
+
 
     private fun stopAutoScroll() {
         autoScrollTimer?.cancel()
