@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sampah.banksampahdigital.databinding.FragmentHistoryBinding
@@ -59,7 +60,19 @@ class HistoryFragment : Fragment() {
                 .get()
                 .addOnSuccessListener { result ->
                     val data = result.documents
-                    adapter = HistoryAdapter(data)
+
+                    // Membagi data berdasarkan status
+                    val inProcessData = data.filter { it.getString("Status") == "di proses" }
+                    val acceptedData = data.filter { it.getString("Status") == "di terima" }
+
+                    // Menggabungkan kembali data dengan urutan yang diinginkan
+                    val sortedData = mutableListOf<DocumentSnapshot>()
+                    sortedData.addAll(inProcessData)
+                    sortedData.addAll(acceptedData)
+
+                    // Mengupdate adapter dengan data yang diurutkan
+                    adapter = HistoryAdapter(sortedData)
+
                     binding?.rvHistory?.adapter = adapter
                 }
                 .addOnFailureListener { exception ->
