@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <!-- Nama Pengguna -->
+        <TextView
+            android:id="@+id/tv_namaPengguna"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/greenDeep"
+            android:text="@string/nama_pengguna"
+            android:fontFamily="@font/poppins_bold"/>
+
+        <!-- Nama Pengguna -->
+        <TextView
+            android:id="@+id/tv_tanggalJemput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/greenDeep"
+            android:text="@string/tanggal"
+            android:fontFamily="@font/poppins"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Jenis Sampah -->
+            <TextView
+                android:id="@+id/tv_jenisSampah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/greenDeep"
+                android:text="@string/jenis_sampah"
+                android:fontFamily="@font/poppins_bold"/>
+
+            <!-- Berat Sampah -->
+            <TextView
+                android:id="@+id/tv_beratSampah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/greenDeep"
+                android:text="@string/berat"
+                android:gravity="end"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_totalPendapatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/greenDeep"
+            android:text="@string/pendapatan"
+            android:layout_gravity="end"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <!-- Jenis Sampah -->
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/redLight"
+                android:text="@string/status"
+                android:fontFamily="@font/poppins_bold"/>
+
+            <!-- Berat Sampah -->
+            <ImageView
+                android:id="@+id/tv_hapusSampah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_jemput_enable"
+                android:gravity="end"
+                android:contentDescription="@string/app_name" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

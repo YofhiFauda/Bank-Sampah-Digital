@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".user.history.HistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
-</FrameLayout>
+        <!--  Start of Title Jemput Sampah  -->
+        <TextView
+            android:id="@+id/tv_titleRiwayatAnda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/riwayat_anda"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/greenDeep"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <!--  End of Title Jemput Sampah  -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_History"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            tools:listitem="@layout/history_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titleRiwayatAnda"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

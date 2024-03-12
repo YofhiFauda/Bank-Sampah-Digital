@@ -92,6 +92,17 @@
 
     <string name="simpan" translatable="false">Simpan</string>
 
+
+    <!--  History Content  -->
+    <string name="riwayat_anda" translatable="false">Riwayat Anda</string>
+
+    <string name="nama_pengguna" translatable="false">Solikin</string>
+    <string name="tanggal" translatable="false">6 Januari 2024</string>
+    <string name="jenis_sampah" translatable="false">Sampah Plastik</string>
+    <string name="berat" translatable="false">Berat: 20 Kg</string>
+    <string name="pendapatan" translatable="false">Pendapatan: Rp 30.000</string>
+    <string name="status" translatable="false">di proses</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_admin" translatable="false">Admin</string>

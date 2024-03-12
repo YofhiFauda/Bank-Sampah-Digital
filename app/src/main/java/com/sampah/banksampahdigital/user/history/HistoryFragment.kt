@@ -1,60 +1,74 @@
 package com.sampah.banksampahdigital.user.history
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sampah.banksampahdigital.R
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.sampah.banksampahdigital.databinding.FragmentHistoryBinding
+import com.sampah.settingharga.ui.SettingHargaAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var adapter: HistoryAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        adapter = HistoryAdapter(mutableListOf())
+        binding?.rvHistory?.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+        }
+
+        setListHistory()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setListHistory() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users")
+                .document(currentUser.uid)
+                .collection("TrashSent")
+                .get()
+                .addOnSuccessListener { result ->
+                    val data = result.documents
+                    adapter = HistoryAdapter(data)
+                    binding?.rvHistory?.adapter = adapter
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                    Toast.makeText(requireActivity(), "silahkan coba lagi", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
