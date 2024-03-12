@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.sampah.banksampahdigital.databinding.FragmentHistoryBinding
 import com.sampah.settingharga.ui.SettingHargaAdapter
 
@@ -54,6 +55,7 @@ class HistoryFragment : Fragment() {
             firestore.collection("users")
                 .document(currentUser.uid)
                 .collection("TrashSent")
+                .orderBy("Tanggal Penjemputan", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener { result ->
                     val data = result.documents
