@@ -1,14 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greenDark"
     tools:context=".user.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--  Start Background Green Medium  -->
+    <View
+        android:id="@+id/background_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        android:background="@drawable/bg_topbar" />
+    <!--  End Background Green Medium  -->
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineHorizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_sample_avatar"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_titlePengguna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/app_name"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="15dp" />
+        <!--  End of Welcome Text  -->
+
+        <!--  Start of Username  -->
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:layout_marginHorizontal="15dp"/>
+        <!--  End of Username  -->
+    </LinearLayout>
+
+    <!--  TODO: Start Vertical Item  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--  Start of Data Pribadi  -->
+        <LinearLayout
+            android:id="@+id/layout_dataPribadi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_rounded_card"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_person_edit_24"
+                app:tint="@color/white"
+                android:contentDescription="@string/data_pribadi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/data_pribadi" />
+        </LinearLayout>
+        <!--  End of Data Pribadi  -->
+
+        <!--  Start of Informasi Penukaran  -->
+        <LinearLayout
+            android:id="@+id/layout_informasiPenukaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_card"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_info_outline_24"
+                app:tint="@color/white"
+                android:contentDescription="@string/informasi_penukaran" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/informasi_penukaran" />
+        </LinearLayout>
+        <!--  End of Informasi Penukaran   -->
+
+        <!--  Start of Penukaran Point -->
+        <LinearLayout
+            android:id="@+id/layout_penukaranPoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_card"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_box_24"
+                app:tint="@color/white"
+                android:contentDescription="@string/penukaran_point" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/penukaran_point" />
+        </LinearLayout>
+        <!--  End of Penukaran Point  -->
+
+        <!--  Start of Riwayat Penukaran -->
+        <LinearLayout
+            android:id="@+id/layout_riwayatPenukaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_card"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_event_note_24"
+                app:tint="@color/white"
+                android:contentDescription="@string/riwayat_penukaran" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/riwayat_penukaran" />
+        </LinearLayout>
+        <!--  End of Riwayat Penukaran  -->
+
+        <!--  Start of Riwayat Penukaran -->
+        <LinearLayout
+            android:id="@+id/layout_keluar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_card"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_exit_to_app_24"
+                app:tint="@color/white"
+                android:contentDescription="@string/keluar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/keluar" />
+        </LinearLayout>
+        <!--  End of Riwayat Penukaran  -->
+
+    </LinearLayout>
+    <!--  TODO: End Vertical Item  -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
