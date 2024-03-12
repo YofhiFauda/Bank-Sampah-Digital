@@ -88,7 +88,7 @@ class TrashFragment : Fragment() {
 
     private fun buatJemputSampah() {
         binding?.btnSimpan?.setOnClickListener {
-            val namaPengguna = binding?.tvTitleNamaPengguna?.text.toString()
+            val namaPengguna = binding?.edNamaPengguna?.text.toString()
             val kategoriSampah = binding?.spinnerKategoriSampah?.selectedItem.toString()
             val beratSampah = binding?.edBeratSampah?.text.toString()
             val tanggalPenjemputan = binding?.edTanggalPenjemputan?.text.toString()
@@ -126,7 +126,6 @@ class TrashFragment : Fragment() {
                 else -> {
                     if(namaPengguna.isNotEmpty() && kategoriSampah.isNotEmpty() && beratSampah.isNotEmpty() && tanggalPenjemputan.isNotEmpty() && alamatPenjemputan.isNotEmpty()){
                         val currentUser = firebaseAuth.currentUser
-
                         val jemputSampah = hashMapOf(
                             "Nama Pengguna" to namaPengguna,
                             "Kategori Sampah" to kategoriSampah,
@@ -143,10 +142,18 @@ class TrashFragment : Fragment() {
                             firestore.collection("users")
                                 .document(currentUser.uid)
                                 .collection("TrashSent")
-                                .add(jemputSampah)
+                                .document()
+                                .set(jemputSampah)
                                 .addOnSuccessListener {
-                                    Log.d("TAG", "DocumentSnapshot added with : $jemputSampah")
+                                    Log.d("TAG", "DocumentSnapshot added with : $it")
                                     showToast(requireActivity(), "Data berhasil ditambahkan")
+                                    binding?.edNamaPengguna?.text = null
+                                    binding?.spinnerKategoriSampah?.setSelection(0)
+                                    binding?.edBeratSampah?.text = null
+                                    binding?.edTanggalPenjemputan?.text = null
+                                    binding?.edAlamatPenjemputan?.text = null
+                                    binding?.edCatatanTambahan?.text = null
+                                    binding?.tvHargaSampah?.text = null
                                 }
                                 .addOnFailureListener { e ->
                                     Log.w("TAG", "Error adding document", e)
