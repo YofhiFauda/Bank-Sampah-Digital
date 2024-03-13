@@ -92,6 +92,19 @@
 
     <string name="simpan" translatable="false">Simpan</string>
 
+    <!-- Jenis Sampah Content   -->
+    <string name="title_Jenis_sampah" translatable="false">Jenis Sampah</string>
+    <string name="subtitle_Jenis_sampah1" translatable="false">Sampah merupakan hasil produksi manusia yang tidak akan pernah luput dari kehidupan sehari-hari. Lalu, jenis-jenis sampah apa yang biasanya kita hasilkan? Yuk, kenali di sini</string>
+    <string name="subtitle_Jenis_sampah2" translatable="false">Sampah jika dibiarkan saja akan mengganggu kebersihan lingkungan secara umum. Sampah dapat dibedakan menjadi dua macam, yaitu:</string>
+
+    <string name="title_anorganik" translatable="false">Sampah Padat (Anorganik)</string>
+    <string name="subtitle_anorganik1" translatable="false">Sampah anorganik adalah sampah yang terdiri atas bahan-bahan anorganik. Contoh bahan-bahan anorganik adalah bahan logam, plastik, kaca, karet, dan kaleng. Sifat sampah anorganik adalah tahan lama dan sukar membusuk.</string>
+    <string name="subtitle_anorganik2" translatable="false">Sampah ini tidak mudah diuraikan oleh mikroorganisme tanah. Apabila dibuang sembarangan, sampah anorganik dapat menimbulkan pencemaran tanah</string>
+
+    <string name="title_organik" translatable="false">Sampah Basah (Organik)</string>
+    <string name="subtitle_organik1" translatable="false">Sampah organik adalah sampah yang terdiri atas bahan-bahan organik. Sifat sampah organik adalah tidak tahan lama dan cepat membusuk. Biasanya sampah jenis ini berasal dari makhluk hidup. Contohnya adalah sayur-sayuran, buah-buah yang membusuk, sisa nasi, daun, dan sebagainya.</string>
+    <string name="subtitle_organik2" translatable="false">Sampah organik mudah diuraikan mikroorganisme tanah. Hanya saja jenis sampah akan menimbulkan bau kurang sedap jika tidak dikelola dengan baik.</string>
+
 
     <!--  History Content  -->
     <string name="riwayat_anda" translatable="false">Riwayat Anda</string>
