@@ -17,3 +17,4 @@ rootProject.name = "Bank Sampah Digital"
 include(":app")
 include(":core")
 include(":settingHarga")
+include(":admin")
