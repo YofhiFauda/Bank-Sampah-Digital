@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.sampah.admin.presentation.AdminDashboardActivity
 import com.sampah.banksampahdigital.MainActivity
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.ActivityLoginBinding
 import com.sampah.banksampahdigital.common.register.RegistrasiActivity
+import com.sampah.banksampahdigital.user.dashboard.DashboardFragment
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -72,14 +75,36 @@ class LoginActivity : AppCompatActivity() {
 
                 else -> {
                     if (email.isNotEmpty() && password.isNotEmpty()){
-                        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                            if (it.isSuccessful){
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
+                        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
+                            if (loginTask.isSuccessful){
+                                val currentUser = firebaseAuth.currentUser
+                                if (currentUser != null) {
+                                    val db = FirebaseFirestore.getInstance()
+
+                                    // Check if the user exists in the "users" collection
+                                    db.collection("users").document(currentUser.uid).get().addOnSuccessListener { document ->
+                                        if (document.exists()) {
+                                            // User exists, redirect to user dashboard
+                                            startActivity(Intent(this, DashboardFragment::class.java))
+                                            finish()
+                                        } else {
+                                            // Check if the user exists in the "admins" collection
+                                            db.collection("admins").document(currentUser.uid).get().addOnSuccessListener { adminDocument ->
+                                                if (adminDocument.exists()) {
+                                                    // Admin exists, redirect to admin dashboard
+                                                    startActivity(Intent(this, AdminDashboardActivity::class.java))
+                                                    finish()
+                                                } else {
+                                                    // User or admin not found, handle accordingly
+                                                    Toast.makeText(this@LoginActivity, "User not found", Toast.LENGTH_SHORT).show()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             else {
-                                Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT)
-                                    .show()
+                                Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
