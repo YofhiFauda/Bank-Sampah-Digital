@@ -1,5 +1,6 @@
 package com.sampah.banksampahdigital.common.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,18 +13,19 @@ import com.sampah.banksampahdigital.MainActivity
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.ActivityLoginBinding
 import com.sampah.banksampahdigital.common.register.RegistrasiActivity
-import com.sampah.banksampahdigital.user.dashboard.DashboardFragment
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var firestore: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val user = auth.currentUser
@@ -36,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         setupAction()
         setupLogin()
     }
+
 
     private fun redirectToLoginScreen(){
         val intent = Intent(this, MainActivity::class.java)
@@ -76,37 +79,45 @@ class LoginActivity : AppCompatActivity() {
                 else -> {
                     if (email.isNotEmpty() && password.isNotEmpty()){
                         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
-                            if (loginTask.isSuccessful){
-                                val currentUser = firebaseAuth.currentUser
-                                if (currentUser != null) {
-                                    val db = FirebaseFirestore.getInstance()
+                            if (loginTask.isSuccessful) {
+                                val user = firebaseAuth.uid
 
-                                    // Check if the user exists in the "users" collection
-                                    db.collection("users").document(currentUser.uid).get().addOnSuccessListener { document ->
-                                        if (document.exists()) {
-                                            // User exists, redirect to user dashboard
-                                            startActivity(Intent(this, DashboardFragment::class.java))
+                                if (user != null) {
+                                    firestore.collection("users").document(user).get().addOnCompleteListener { userTask ->
+                                        if (userTask.isSuccessful && userTask.result != null && userTask.result.exists()) {
+                                            startActivity(Intent(this, MainActivity::class.java))
                                             finish()
                                         } else {
-                                            // Check if the user exists in the "admins" collection
-                                            db.collection("admins").document(currentUser.uid).get().addOnSuccessListener { adminDocument ->
-                                                if (adminDocument.exists()) {
-                                                    // Admin exists, redirect to admin dashboard
+                                            // Cek apakah email pengguna ada di koleksi 'admin'
+                                            firestore.collection("admin").document(user).get().addOnCompleteListener { adminTask ->
+                                                if (adminTask.isSuccessful && adminTask.result != null && adminTask.result.exists()) {
+                                                    // Pengguna dengan email yang login terdapat di koleksi 'admin'
+                                                    // Simpan informasi bahwa pengguna adalah admin
+                                                    val sharedPref = getSharedPreferences("user_type", Context.MODE_PRIVATE)
+                                                    with (sharedPref.edit()) {
+                                                        putBoolean("isAdmin", true)
+                                                        apply()
+                                                    }
+                                                    // Redirect ke halaman dashboard admin
                                                     startActivity(Intent(this, AdminDashboardActivity::class.java))
                                                     finish()
                                                 } else {
-                                                    // User or admin not found, handle accordingly
+                                                    // Jika tidak ada di koleksi 'user' maupun 'admin'
                                                     Toast.makeText(this@LoginActivity, "User not found", Toast.LENGTH_SHORT).show()
                                                 }
                                             }
                                         }
                                     }
+                                } else {
+                                    // Gagal mendapatkan email pengguna
+                                    Toast.makeText(this@LoginActivity, "Failed to get user email", Toast.LENGTH_SHORT).show()
                                 }
-                            }
-                            else {
+                            } else {
+                                // Gagal login
                                 Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT).show()
                             }
                         }
+
                     }
                     else {
                         Toast.makeText(this, resources.getString(R.string.login_error), Toast.LENGTH_SHORT).show()

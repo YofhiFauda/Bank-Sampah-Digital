@@ -1,8 +1,10 @@
 package com.sampah.banksampahdigital
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.sampah.banksampahdigital.common.onboarding.OnboardingActivity
 import androidx.core.view.forEach
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +13,7 @@ import com.sampah.banksampahdigital.databinding.ActivityMainBinding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sampah.admin.presentation.AdminDashboardActivity
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -32,10 +35,17 @@ class MainActivity : AppCompatActivity() {
 
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val user = auth.currentUser
-            if (user == null) {
-                redirectToLoginScreen()
+            if (user != null) {
+                val sharedPref = getSharedPreferences("user_type", Context.MODE_PRIVATE)
+                val isAdmin = sharedPref.getBoolean("isAdmin", false)
+                if (!isAdmin) {
+                    redirectToLoginScreen()
+                    Log.e(user.uid, "Success Login UID: ${user.uid}")
+                }
+
             }
         }
+
         setupNavController()
         setupBottomNavigationView()
     }
