@@ -13,7 +13,6 @@ import com.sampah.banksampahdigital.databinding.ActivityMainBinding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.sampah.admin.presentation.AdminDashboardActivity
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -32,19 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-
-        authStateListener = FirebaseAuth.AuthStateListener { auth ->
-            val user = auth.currentUser
-            if (user != null) {
-                val sharedPref = getSharedPreferences("user_type", Context.MODE_PRIVATE)
-                val isAdmin = sharedPref.getBoolean("isAdmin", false)
-                if (!isAdmin) {
-                    redirectToLoginScreen()
-                    Log.e(user.uid, "Success Login UID: ${user.uid}")
-                }
-
-            }
-        }
 
         setupNavController()
         setupBottomNavigationView()
@@ -86,23 +72,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
-
-
-    private fun redirectToLoginScreen() {
-        val intent = Intent(this, OnboardingActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        firebaseAuth.addAuthStateListener(authStateListener)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        firebaseAuth.removeAuthStateListener(authStateListener)
     }
 }

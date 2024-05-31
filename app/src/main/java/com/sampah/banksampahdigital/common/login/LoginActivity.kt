@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sampah.admin.presentation.AdminDashboardActivity
 import com.sampah.banksampahdigital.MainActivity
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.ActivityLoginBinding
@@ -80,46 +79,21 @@ class LoginActivity : AppCompatActivity() {
                     if (email.isNotEmpty() && password.isNotEmpty()){
                         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
                             if (loginTask.isSuccessful) {
-                                val user = firebaseAuth.uid
+                                val user = firebaseAuth.currentUser
 
                                 if (user != null) {
-                                    firestore.collection("users").document(user).get().addOnCompleteListener { userTask ->
-                                        if (userTask.isSuccessful && userTask.result != null && userTask.result.exists()) {
+                                    firestore.collection("users").document(user.uid).get().addOnCompleteListener { document  ->
+                                        if (document.result.exists()) {
                                             startActivity(Intent(this, MainActivity::class.java))
                                             finish()
-                                        } else {
-                                            // Cek apakah email pengguna ada di koleksi 'admin'
-                                            firestore.collection("admin").document(user).get().addOnCompleteListener { adminTask ->
-                                                if (adminTask.isSuccessful && adminTask.result != null && adminTask.result.exists()) {
-                                                    // Pengguna dengan email yang login terdapat di koleksi 'admin'
-                                                    // Simpan informasi bahwa pengguna adalah admin
-                                                    val sharedPref = getSharedPreferences("user_type", Context.MODE_PRIVATE)
-                                                    with (sharedPref.edit()) {
-                                                        putBoolean("isAdmin", true)
-                                                        apply()
-                                                    }
-                                                    // Redirect ke halaman dashboard admin
-                                                    startActivity(Intent(this, AdminDashboardActivity::class.java))
-                                                    finish()
-                                                } else {
-                                                    // Jika tidak ada di koleksi 'user' maupun 'admin'
-                                                    Toast.makeText(this@LoginActivity, "User not found", Toast.LENGTH_SHORT).show()
-                                                }
-                                            }
+                                        }else {
+                                            Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT).show()
                                         }
                                     }
-                                } else {
-                                    // Gagal mendapatkan email pengguna
-                                    Toast.makeText(this@LoginActivity, "Failed to get user email", Toast.LENGTH_SHORT).show()
                                 }
-                            } else {
-                                // Gagal login
-                                Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT).show()
                             }
                         }
-
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, resources.getString(R.string.login_error), Toast.LENGTH_SHORT).show()
                     }
                 }

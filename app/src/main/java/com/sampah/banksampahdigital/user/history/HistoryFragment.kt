@@ -15,8 +15,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sampah.banksampahdigital.databinding.FragmentHistoryBinding
-import com.sampah.settingharga.ui.SettingHargaAdapter
-
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
