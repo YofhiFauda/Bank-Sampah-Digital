@@ -34,16 +34,16 @@ class CategoryFragment : Fragment() {
 
     private fun setupView(){
         binding.apply {
-            binding?.tvSubtitleJemputSampah1?.text = R.string.subtitle_Jenis_sampah1.toString()
-            binding?.tvSubtitleJemputSampah2?.text = R.string.subtitle_Jenis_sampah2.toString()
+            binding?.tvSubtitleJemputSampah1?.text = resources.getString(R.string.subtitle_Jenis_sampah1)
+            binding?.tvSubtitleJemputSampah2?.text = resources.getString(R.string.subtitle_Jenis_sampah2)
 
-            binding?.tvTitleSampahAnorganik?.text = R.string.title_anorganik.toString()
-            binding?.tvSubtitleSampahAnorganik1?.text = R.string.subtitle_anorganik1.toString()
-            binding?.tvSubtitleSampahAnorganik2?.text = R.string.subtitle_anorganik2.toString()
+            binding?.tvTitleSampahAnorganik?.text = resources.getString(R.string.title_anorganik)
+            binding?.tvSubtitleSampahAnorganik1?.text = resources.getString(R.string.subtitle_anorganik1)
+            binding?.tvSubtitleSampahAnorganik2?.text = resources.getString(R.string.subtitle_anorganik2)
 
-            binding?.tvTitleSampahOrganik?.text = R.string.title_organik.toString()
-            binding?.tvSybtitleSampahOrganik1?.text = R.string.subtitle_organik1.toString()
-            binding?.tvSybtitleSampahOrganik2?.text = R.string.subtitle_organik2.toString()
+            binding?.tvTitleSampahOrganik?.text = resources.getString(R.string.title_organik)
+            binding?.tvSybtitleSampahOrganik1?.text = resources.getString(R.string.subtitle_organik1)
+            binding?.tvSybtitleSampahOrganik2?.text = resources.getString(R.string.subtitle_organik2)
         }
     }
 
