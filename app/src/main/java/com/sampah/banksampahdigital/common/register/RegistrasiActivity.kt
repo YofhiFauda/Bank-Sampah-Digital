@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.databinding.ActivityRegistrasiBinding
 import com.sampah.banksampahdigital.common.login.LoginActivity
@@ -81,7 +83,27 @@ class RegistrasiActivity : AppCompatActivity() {
                                                         .addOnSuccessListener {
                                                             // Tampilkan pesan sukses
                                                             Toast.makeText(this@RegistrasiActivity, "Your account successfully created!", Toast.LENGTH_SHORT).show()
-
+                                                            // Kirim email verifikasi
+                                                            currentUser.sendEmailVerification()
+                                                                .addOnCompleteListener { verificationTask ->
+                                                                    if (verificationTask.isSuccessful) {
+                                                                        // Tampilkan pesan bahwa email verifikasi telah dikirim
+                                                                        Toast.makeText(this@RegistrasiActivity, "Email verification sent. Please check your email.", Toast.LENGTH_SHORT).show()
+                                                                        AlertDialog.Builder(this).apply {
+                                                                            setTitle("Verification Email")
+                                                                            setMessage("Email verification sent. Please check your email.")
+                                                                            setPositiveButton("OK") { dialog, _ ->
+                                                                                dialog.dismiss()
+                                                                            }
+                                                                            create()
+                                                                            show()
+                                                                        }
+                                                                    } else {
+                                                                        // Gagal mengirim email verifikasi
+                                                                        Toast.makeText(this@RegistrasiActivity, "Failed to send email verification: ${verificationTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                                                                        showVerificationFailedDialog(currentUser)
+                                                                    }
+                                                                }
                                                         }
                                                         .addOnFailureListener { e ->
                                                             // Tampilkan pesan gagal jika data tidak dapat disimpan di Firestore
@@ -111,6 +133,29 @@ class RegistrasiActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    // Tambahkan fungsi ini di luar `onCreate` atau di luar fungsi register
+    private fun showVerificationFailedDialog(currentUser: FirebaseUser) {
+        AlertDialog.Builder(this).apply {
+            setTitle("Failed Verification")
+            setMessage("Failed to send email verification")
+            setPositiveButton("Send Again") { dialog, _ ->
+                currentUser.sendEmailVerification()
+                    .addOnCompleteListener { verificationTask ->
+                        if (verificationTask.isSuccessful) {
+                            Toast.makeText(this@RegistrasiActivity, "Email verification sent. Please check your email.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this@RegistrasiActivity, "Failed to send email verification: ${verificationTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+            setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            create()
+            show()
+        }
     }
 
     private fun setupAction() {
