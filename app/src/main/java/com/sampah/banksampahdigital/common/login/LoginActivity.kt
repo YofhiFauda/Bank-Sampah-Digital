@@ -84,8 +84,13 @@ class LoginActivity : AppCompatActivity() {
                                 if (user != null) {
                                     firestore.collection("users").document(user.uid).get().addOnCompleteListener { document  ->
                                         if (document.result.exists()) {
-                                            startActivity(Intent(this, MainActivity::class.java))
-                                            finish()
+                                            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+                                            if(user.isEmailVerified){
+                                                startActivity(Intent(this, MainActivity::class.java))
+                                                finish()
+                                            }else{
+                                                Toast.makeText(this, "Please Verify Your Email", Toast.LENGTH_SHORT).show()
+                                            }
                                         }else {
                                             Toast.makeText(this@LoginActivity, "Please Try Again", Toast.LENGTH_SHORT).show()
                                         }
