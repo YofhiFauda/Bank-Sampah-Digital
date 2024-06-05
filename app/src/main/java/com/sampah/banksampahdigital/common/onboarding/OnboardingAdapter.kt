@@ -25,13 +25,10 @@ class OnboardingAdapter(private val context: Context, private val onBoardingItem
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view: View = LayoutInflater.from(context).inflate(R.layout.onboarding_screen_layout, null)
-        val imageView: ImageView
-        val title: TextView
-        val subtitle: TextView
 
-        imageView = view.findViewById(R.id.imageViewOnboarding);
-        title = view.findViewById(R.id.tv_titleOnboarding);
-        subtitle = view.findViewById(R.id.tv_subtitleOnboarding);
+        val imageView: ImageView = view.findViewById(R.id.imageViewOnboarding);
+        val title: TextView = view.findViewById(R.id.tv_titleOnboarding);
+        val subtitle: TextView = view.findViewById(R.id.tv_subtitleOnboarding);
 
         imageView.setImageResource(onBoardingItemsList[position].imageResId)
         title.text = onBoardingItemsList[position].title
