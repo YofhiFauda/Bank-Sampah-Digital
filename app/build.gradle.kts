@@ -71,8 +71,8 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     //coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")

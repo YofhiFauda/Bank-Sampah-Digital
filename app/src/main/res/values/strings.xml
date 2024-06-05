@@ -131,6 +131,7 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_admin" translatable="false">Admin</string>
     <string name="title_user" translatable="false">User</string>
+    <string name="next" translatable="false">Next</string>
 
 
 </resources>
