@@ -89,7 +89,6 @@
                     android:id="@+id/tv_totalPengiriman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/contoh_total_pengiriman"
                     android:textSize="14sp"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/greenDeep"/>
@@ -127,7 +126,6 @@
                     android:id="@+id/tv_totalPendapatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/contoh_total_saldo"
                     android:textSize="14sp"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@android:color/black"/>

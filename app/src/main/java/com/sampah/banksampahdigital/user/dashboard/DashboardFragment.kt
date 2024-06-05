@@ -73,21 +73,28 @@ class DashboardFragment : Fragment() {
 
                         // Ambil nilai pendapatan dari dokumen
                         val pendapatanField = document.getString("Pendapatan")
+                        val statusField = document.getString("Status")
 
-                        // Konversi nilai pendapatan dari string ke double jika tidak null atau kosong
-                        if (!pendapatanField.isNullOrEmpty()) {
-                            try {
-                                val pendapatan = pendapatanField.toDouble()
-                                totalPendapatan += pendapatan
-                            } catch (e: NumberFormatException) {
-                                Log.e("TAG", "Invalid Pendapatan value in document: ${document.id}")
+                        if (statusField == "di terima") {
+                            // Konversi nilai pendapatan dari string ke double jika tidak null atau kosong
+                            if (!pendapatanField.isNullOrEmpty()) {
+                                try {
+                                    val pendapatan = pendapatanField.toDouble()
+                                    totalPendapatan += pendapatan
+                                } catch (e: NumberFormatException) {
+                                    Log.e("TAG", "Invalid Pendapatan value in document: ${document.id}")
+                                    // Tambahkan penanganan kesalahan di sini jika diperlukan
+                                }
+                            } else {
+                                Log.e("TAG", "Pendapatan field is empty or null in document: ${document.id}")
                                 // Tambahkan penanganan kesalahan di sini jika diperlukan
                             }
                         } else {
-                            Log.e("TAG", "Pendapatan field is empty or null in document: ${document.id}")
-                            // Tambahkan penanganan kesalahan di sini jika diperlukan
+                            Log.e("TAG", "Status field is not 'di terima' in document: ${document.id}")
+                            totalPendapatan = 0.0
                         }
                     }
+
 
                     val totalPendapatanFormat = String.format("Rp %,.3f", totalPendapatan)
                     val totalPengirimanFormat = String.format("$totalPengiriman Pengiriman")

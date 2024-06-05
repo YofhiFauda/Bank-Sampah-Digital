@@ -63,9 +63,6 @@
     <string name="title_slider5" translatable="false">Tukarkan Sampah Plastikmu Sekarang!</string>
     <string name="subtitle_slider5" translatable="false">Aplikasi Bank Sampah adalah solusi untuk menyelesaikan masalah sosial tentang kebersihan lingkungan </string>
 
-    <string name="contoh_total_pengiriman" translatable="false">100 Pengiriman</string>
-    <string name="contoh_total_saldo" translatable="false">Rp.100.000</string>
-
     <!--  Jemput Sampah Content  -->
     <string name="title_jemputSampah" translatable="false">Jemput Sampah</string>
     <string name="warning_jemputSampah" translatable="false">Mohon isi data di bawah ini dengan benar</string>
