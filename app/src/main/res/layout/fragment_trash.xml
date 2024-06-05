@@ -296,6 +296,7 @@
                 android:hint="@string/hint_tanggalJemput"
                 android:textColorHint="@color/greenMedium"
                 android:minHeight="50dp"
+                android:focusable="false"
                 android:drawableStart="@drawable/ic_baseline_date_range_24"
                 android:drawablePadding="10dp"
                 android:background="@drawable/bg_textfield_outlined"
