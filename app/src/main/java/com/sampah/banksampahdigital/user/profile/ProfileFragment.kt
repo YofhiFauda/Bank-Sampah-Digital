@@ -81,6 +81,22 @@ class ProfileFragment : Fragment() {
         setupView()
         setupExit()
         loadProfileImage()
+        setupAction()
+    }
+
+    private fun setupAction() {
+        binding?.layoutDataPribadi?.setOnClickListener {
+            Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()
+        }
+        binding?.layoutInformasiPenukaran?.setOnClickListener {
+            Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()
+        }
+        binding?.layoutPenukaranPoint?.setOnClickListener {
+            Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()
+        }
+        binding?.layoutRiwayatPenukaran?.setOnClickListener {
+            Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showBottomSheetDialog() {
