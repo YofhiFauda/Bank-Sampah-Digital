@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 <!--        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>-->
+        <item name="android:statusBarColor">@color/greenDark</item>
     </style>
 
 </resources>
