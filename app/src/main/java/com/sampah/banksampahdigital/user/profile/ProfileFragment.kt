@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.databinding.FragmentProfileBinding
 import com.sampah.banksampahdigital.utils.Media
+import com.yalantis.ucrop.UCrop
 import java.io.File
 import java.io.FileOutputStream
 
@@ -132,7 +133,6 @@ class ProfileFragment : Fragment() {
                         binding?.tvTitlePengguna?.text = username
                         binding?.tvEmail?.text = email
 
-
                         // Lakukan apa pun dengan data pengguna yang diperoleh
                         Log.d(ContentValues.TAG, "Username: $username, Email: $email")
                     } else {
@@ -163,10 +163,7 @@ class ProfileFragment : Fragment() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
-            val myFile = Media.uriToFile(selectedImg, requireActivity())
-            getFile = myFile
-            binding?.profileImage?.setImageURI(selectedImg)
-            saveImageToInternalStorage(BitmapFactory.decodeFile(myFile.path))
+            startCrop(selectedImg)
         }
     }
 
@@ -190,10 +187,35 @@ class ProfileFragment : Fragment() {
     ) {
         if (it.resultCode == RESULT_OK) {
             val myFile = File(currentPhotoPath)
-            getFile = myFile
-            val result = BitmapFactory.decodeFile(myFile.path)
-            binding?.profileImage?.setImageBitmap(result)
-            saveImageToInternalStorage(result)
+            val uri = Uri.fromFile(myFile)
+            startCrop(uri)
+        }
+    }
+
+    private fun startCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image.jpg"))
+        val options = UCrop.Options().apply {
+            withAspectRatio(1f, 1f)
+            setFreeStyleCropEnabled(false)
+        }
+        UCrop.of(uri, destinationUri)
+            .withAspectRatio(1.0f, 1.0f) // Force 1:1 aspect ratio
+            .withOptions(options)
+            .start(requireContext(), this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            val resultUri = UCrop.getOutput(data!!)
+            resultUri?.let {
+                binding?.profileImage?.setImageURI(it)
+                saveImageToInternalStorage(BitmapFactory.decodeFile(File(it.path).absolutePath))
+            }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            val cropError = UCrop.getError(data!!)
+            // Tangani error cropping
+            Log.e("ProfileFragment", "Crop error: $cropError")
         }
     }
 
@@ -212,6 +234,25 @@ class ProfileFragment : Fragment() {
         editor.putString("profile_image_path", path)
         editor.apply()
     }
+//FUll IMAGE PREVIEW
+//    private fun showImageDialog() {
+//        val dialog = Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+//        dialog.setContentView(R.layout.profil_image_dialog)
+//        val imageView = dialog.findViewById<ImageView>(R.id.imageView)
+//
+//        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+//        val path = sharedPreferences.getString("profile_image_path", null)
+//        if (!path.isNullOrEmpty()) {
+//            val file = File(requireContext().filesDir, path)
+//            if (file.exists()) {
+//                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+//                imageView.setImageBitmap(bitmap)
+//            }
+//        }
+//
+//        dialog.show()
+//    }
+
 
     private fun showImageDialog() {
         val dialog = Dialog(requireContext())
@@ -295,3 +336,4 @@ class ProfileFragment : Fragment() {
         const val CAMERA_X_RESULT = 200
     }
 }
+
