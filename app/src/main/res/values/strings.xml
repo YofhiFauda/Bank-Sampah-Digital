@@ -130,5 +130,13 @@
     <string name="title_user" translatable="false">User</string>
     <string name="next" translatable="false">Next</string>
 
+    <string name="permission_denied" translatable="false">Can\'t get permission</string>
+    <string name="error_pick_image" translatable="false">Error pick image</string>
+    <string name="error_showing_camera" translatable="false">Error showing camera</string>
+
+    <string name="ubah_gambar_profil" translatable="false">Ubah gambar profil</string>
+    <string name="ambil_foto_menggunakan_kamera" translatable="false">Ambil foto menggunakan kamera</string>
+    <string name="ambil_dari_galeri" translatable="false">Ambil dari galeri</string>
+
 
 </resources>
