@@ -67,6 +67,9 @@ dependencies {
     implementation ("androidx.annotation:annotation:1.8.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
@@ -81,11 +84,13 @@ dependencies {
     //DataStore
     implementation ("androidx.datastore:datastore-core:1.1.1")
     implementation ("androidx.datastore:datastore-preferences:1.1.1")
+    implementation ("androidx.datastore:datastore-preferences-core:1.1.1")
+
     implementation("androidx.compose.ui:ui-graphics-android:1.6.7")
     implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
 
-
+    //CameraX
     implementation ("com.google.guava:guava:32.0.1-android")
     implementation ("androidx.camera:camera-camera2:1.4.0-beta01")
     implementation("androidx.camera:camera-view:1.3.3")

@@ -2,6 +2,7 @@ package com.sampah.banksampahdigital.user.history
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sampah.banksampahdigital.databinding.FragmentHistoryBinding
+import com.sampah.banksampahdigital.notifications.StatusMonitoringService
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
@@ -44,7 +46,14 @@ class HistoryFragment : Fragment() {
             this.adapter = adapter
         }
 
+        // Memulai layanan StatusMonitoringService
+        //Untuk Notifikasi di latar belakang
+        val serviceIntent = Intent(requireContext(), StatusMonitoringService::class.java)
+        requireContext().startService(serviceIntent)
+
+
         setListHistory()
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -61,17 +70,31 @@ class HistoryFragment : Fragment() {
 
                     // Membagi data berdasarkan status
                     val inProcessData = data.filter { it.getString("Status") == "di proses" }
+                    val rejectData = data.filter { it.getString("Status") == "di tolak" }
                     val acceptedData = data.filter { it.getString("Status") == "di terima" }
 
                     // Menggabungkan kembali data dengan urutan yang diinginkan
                     val sortedData = mutableListOf<DocumentSnapshot>()
                     sortedData.addAll(inProcessData)
+                    sortedData.addAll(rejectData)
                     sortedData.addAll(acceptedData)
 
                     // Mengupdate adapter dengan data yang diurutkan
                     adapter = HistoryAdapter(sortedData)
 
                     binding?.rvHistory?.adapter = adapter
+
+                    // Menyiarkan siaran ketika ada perubahan status
+                    for (document in data) {
+                        val status = document.getString("Status")
+                        val documentId = document.id
+                        if (status != null && (status == "di terima" || status == "di tolak")) {
+                            val intent = Intent("com.sampah.banksampahdigital.STATUS_CHANGED")
+                            intent.putExtra("status", status)
+                            intent.putExtra("documentId", documentId)
+                            requireContext().sendBroadcast(intent)
+                        }
+                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
