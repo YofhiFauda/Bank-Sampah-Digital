@@ -1,10 +1,17 @@
 package com.sampah.banksampahdigital.user.history
 
+import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.databinding.HistoryItemBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -14,6 +21,50 @@ class HistoryAdapter (private val dataList: MutableList<DocumentSnapshot>) :
 
     inner class ViewHolder(private val binding: HistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.tvHapusSampah.setOnClickListener {
+                showDeleteConfirmationDialog()
+            }
+        }
+
+        private fun showDeleteConfirmationDialog() {
+            val builder = AlertDialog.Builder(itemView.context)
+            builder.setTitle("Konfirmasi")
+            builder.setMessage("Apakah Anda yakin ingin menghapus dokumen ini?")
+            builder.setPositiveButton("Ya") { dialog, _ ->
+                val position = adapterPosition
+                val documentSnapshot = dataList[position]
+                deleteDocument(documentSnapshot.id)
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Tidak") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.create().show()
+        }
+
+        private fun deleteDocument(documentId: String) {
+            val firebaseAuth = FirebaseAuth.getInstance()
+            val firestore = FirebaseFirestore.getInstance()
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser != null) {
+                firestore.collection("users")
+                    .document(currentUser.uid)
+                    .collection("TrashSent")
+                    .document(documentId)
+                    .delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(itemView.context, "Dokumen berhasil dihapus", Toast.LENGTH_SHORT).show()
+                        dataList.removeAt(bindingAdapterPosition)
+                        notifyItemRemoved(bindingAdapterPosition)
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error deleting document", e)
+                        Toast.makeText(itemView.context, "Gagal menghapus dokumen", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
 
         fun bind(data: DocumentSnapshot) {
             binding.apply {
