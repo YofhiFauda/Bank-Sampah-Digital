@@ -3,11 +3,14 @@ package com.sampah.banksampahdigital.common.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sampah.banksampahdigital.MainActivity
 import com.sampah.banksampahdigital.databinding.ActivityRegistrasiBinding
 import com.sampah.banksampahdigital.common.login.LoginActivity
 import com.sampah.banksampahdigital.R
@@ -17,6 +20,8 @@ class RegistrasiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistrasiBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var verificationRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,12 +93,12 @@ class RegistrasiActivity : AppCompatActivity() {
                                                                 .addOnCompleteListener { verificationTask ->
                                                                     if (verificationTask.isSuccessful) {
                                                                         // Tampilkan pesan bahwa email verifikasi telah dikirim
-                                                                        Toast.makeText(this@RegistrasiActivity, "Email verification sent. Please check your email.", Toast.LENGTH_SHORT).show()
                                                                         AlertDialog.Builder(this).apply {
                                                                             setTitle("Verification Email")
                                                                             setMessage("Email verification sent. Please check your email.")
                                                                             setPositiveButton("OK") { dialog, _ ->
                                                                                 dialog.dismiss()
+                                                                                startVerificationCheck(currentUser)
                                                                             }
                                                                             create()
                                                                             show()
@@ -132,7 +137,42 @@ class RegistrasiActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun startVerificationCheck(user: FirebaseUser) {
+        verificationRunnable = object : Runnable {
+            override fun run() {
+                user.reload().addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        if (user.isEmailVerified) {
+                            loginAutomatically(user.email!!, binding.edRegisterPassword.text.toString())
+                        } else {
+                            handler.postDelayed(this, 1500) // Cek ulang setiap 3 detik
+                        }
+                    } else {
+                        Toast.makeText(this@RegistrasiActivity, "Failed to reload user.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+        handler.post(verificationRunnable)
+    }
+
+    private fun loginAutomatically(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
+            if (loginTask.isSuccessful) {
+                redirectToDashboard()
+            } else {
+                Toast.makeText(this, "Login failed: ${loginTask.exception?.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun redirectToDashboard() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     // Tambahkan fungsi ini di luar `onCreate` atau di luar fungsi register

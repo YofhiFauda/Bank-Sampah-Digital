@@ -30,6 +30,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.R
+import com.sampah.banksampahdigital.common.login.LoginActivity
 import com.sampah.banksampahdigital.databinding.FragmentProfileBinding
 import com.sampah.banksampahdigital.utils.Media
 import com.yalantis.ucrop.UCrop
@@ -291,6 +292,9 @@ class ProfileFragment : Fragment() {
                 setMessage("Apakah anda yakin ingin keluar?")
                 setPositiveButton("Ya") { _, _ ->
                     firebaseAuth.signOut()
+                    val loginIntent = Intent(activity, LoginActivity::class.java)
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(loginIntent)
                     activity?.finish()
                 }
                 setNegativeButton("Tidak") { dialog, _ ->
@@ -301,6 +305,7 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
