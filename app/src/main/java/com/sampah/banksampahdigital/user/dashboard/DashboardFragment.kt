@@ -1,19 +1,28 @@
 package com.sampah.banksampahdigital.user.dashboard
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.sampah.banksampahdigital.common.onboarding.OnboardingActivity
 import com.sampah.banksampahdigital.databinding.FragmentDashboardBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 
@@ -27,8 +36,8 @@ class DashboardFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
 
     private var autoScrollTimer: Timer? = null
-    private val autoScrollDelay: Long = 3000 // Delay in milliseconds for auto-scroll
-    private var isUserScrolling = false
+    private val autoScrollDelay: Long = 5000 // Delay in milliseconds for auto-scroll
+    private val REQUEST_CODE_INTERNET_PERMISSION = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +54,8 @@ class DashboardFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
+
+
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val user = auth.currentUser
             if (user == null) {
@@ -54,6 +65,8 @@ class DashboardFragment : Fragment() {
         setDashboard()
         setListCarousel()
         getTotalPengirimanDanPendapatan()
+        // Check and request permissions
+        checkAndRequestPermissions()
     }
 
     private fun getTotalPengirimanDanPendapatan() {
@@ -62,7 +75,7 @@ class DashboardFragment : Fragment() {
             firestore.collection("users")
                 .document(currentUser.uid)
                 .collection("TrashSent")
-                .get()
+                .get(Source.SERVER) // Menggunakan sumber server sebagai sumber data
                 .addOnSuccessListener { documents ->
                     var totalPengiriman = 0
                     var totalPendapatan = 0.0
@@ -96,7 +109,9 @@ class DashboardFragment : Fragment() {
                     }
 
 
-                    val totalPendapatanFormat = String.format("Rp %,.3f", totalPendapatan)
+//                    val totalPendapatanFormat = String.format("Rp %,.3f", totalPendapatan)
+                    val totalPendapatanFormat = "Rp %,.3f".format(Locale("id", "ID"), totalPendapatan)
+
                     val totalPengirimanFormat = String.format("$totalPengiriman Pengiriman")
 
                     // Lakukan sesuatu dengan total pengiriman dan total pendapatan, misalnya tampilkan atau simpan
@@ -111,6 +126,14 @@ class DashboardFragment : Fragment() {
                     Log.w("TAG", "Error getting documents: ", exception)
                 }
         }
+    }
+
+    fun formatRupiah(nominal: Double): String {
+        val formatter = NumberFormat.getCurrencyInstance(Locale("id", "ID")) as DecimalFormat
+        val symbols = formatter.decimalFormatSymbols
+        symbols.currencySymbol = "Rp "
+        formatter.decimalFormatSymbols = symbols
+        return formatter.format(nominal)
     }
 
 
@@ -177,13 +200,45 @@ class DashboardFragment : Fragment() {
                 }
         }
     }
-
-
     private fun redirectToLoginScreen() {
         val intent = Intent(requireContext(), OnboardingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         activity?.finish()
+    }
+
+    private fun checkAndRequestPermissions() {
+        if (ContextCompat.checkSelfPermission( requireContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.INTERNET),
+                REQUEST_CODE_INTERNET_PERMISSION
+            )
+        } else {
+            // Permission already granted, proceed with the task
+            getTotalPengirimanDanPendapatan()
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE_INTERNET_PERMISSION -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    // Permission granted, proceed with the task
+                    getTotalPengirimanDanPendapatan()
+                } else {
+                    // Permission denied, show a message to the user
+                    Toast.makeText( requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
     }
 
     override fun onStart() {

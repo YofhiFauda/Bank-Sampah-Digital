@@ -21,9 +21,9 @@ class TrashFragment : Fragment() {
     private var _binding: FragmentTrashBinding? = null
     private val binding get() = _binding
 
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
-    private var hargaMap: Map<String, String> = HashMap()
+    lateinit var firebaseAuth: FirebaseAuth
+    lateinit var firestore: FirebaseFirestore
+    var hargaMap: Map<String, String> = HashMap()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,7 +71,6 @@ class TrashFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner?.adapter = adapter
 
-        // Menambahkan listener untuk menampilkan harga saat memilih jenis sampah
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedJenisSampah = parent?.getItemAtPosition(position).toString()
@@ -79,11 +78,8 @@ class TrashFragment : Fragment() {
                 binding?.tvContohHargaSampah?.text = selectedHarga ?: "Harga tidak tersedia"
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
     }
 
     private fun buatJemputSampah() {
@@ -96,78 +92,82 @@ class TrashFragment : Fragment() {
             val catatan = binding?.edCatatanTambahan?.text.toString()
 
             val selectedHarga = hargaMap[kategoriSampah]
-            val hargaTextView = binding?.tvHargaSampah
-            hargaTextView?.text = selectedHarga ?: "Harga tidak tersedia"
+            binding?.tvHargaSampah?.text = selectedHarga ?: "Harga tidak tersedia"
 
-            val beratSampahDouble = beratSampah.toDoubleOrNull()
-            val hargaPerKgDouble = selectedHarga?.toDoubleOrNull()
+            val jemputSampah = createJemputSampah(
+                namaPengguna, kategoriSampah, beratSampah, selectedHarga,
+                tanggalPenjemputan, alamatPenjemputan, catatan
+            )
 
-            val totalHarga = beratSampahDouble?.times(hargaPerKgDouble!!)
-            // If you want to display totalHarga as a string, you can use String.format
-            val totalHargaString = String.format("%.3f", totalHarga)
-
-
-            when {
-                namaPengguna.isEmpty() -> {
-                    binding?.edNamaPengguna?.error = "Mohon lengkapi nama anda dahulu"
-                }
-                kategoriSampah.isEmpty() -> {
-                    showToast(requireActivity(), "Mohon pilih jenis sampah anda")
-                }
-                beratSampah.isEmpty() -> {
-                    binding?.edBeratSampah?.error = "Mohon isi berat sampah anda"
-                }
-                tanggalPenjemputan.isEmpty() -> {
-                    binding?.edTanggalPenjemputan?.error = "Mohon masukan tanggal penjemputan"
-                }
-                alamatPenjemputan.isEmpty() -> {
-                    binding?.edAlamatPenjemputan?.error = "Mohon masukan alamat anda"
-                }
-                else -> {
-                    if(namaPengguna.isNotEmpty() && kategoriSampah.isNotEmpty() && beratSampah.isNotEmpty() && tanggalPenjemputan.isNotEmpty() && alamatPenjemputan.isNotEmpty()){
-                        val currentUser = firebaseAuth.currentUser
-                        val jemputSampah = hashMapOf(
-                            "Nama Pengguna" to namaPengguna,
-                            "Kategori Sampah" to kategoriSampah,
-                            "Berat Sampah" to beratSampah,
-                            "Harga Sampah" to selectedHarga,
-                            "Tanggal Penjemputan" to tanggalPenjemputan,
-                            "Alamat Penjemputan" to alamatPenjemputan,
-                            "Catatan" to catatan,
-                            "Status" to "di proses",
-                            "Pendapatan" to totalHargaString
-                        )
-
-                        if (currentUser != null) {
-                            firestore.collection("users")
-                                .document(currentUser.uid)
-                                .collection("TrashSent")
-                                .document()
-                                .set(jemputSampah)
-                                .addOnSuccessListener {
-                                    Log.d("TAG", "DocumentSnapshot added with : $it")
-                                    showToast(requireActivity(), "Data berhasil ditambahkan")
-                                    binding?.edNamaPengguna?.text = null
-                                    binding?.spinnerKategoriSampah?.setSelection(0)
-                                    binding?.edBeratSampah?.text = null
-                                    binding?.edTanggalPenjemputan?.text = null
-                                    binding?.edAlamatPenjemputan?.text = null
-                                    binding?.edCatatanTambahan?.text = null
-                                    binding?.tvHargaSampah?.text = null
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("TAG", "Error adding document", e)
-                                    showToast(requireActivity(), "Gagal menambahkan data")
-                                }
-                        }
-                    }
-                    else {
-                        showToast(requireActivity(), "Mohon lengkapi data di atas ")
-                    }
-                }
+            if (jemputSampah != null) {
+                saveJemputSampah(jemputSampah)
             }
         }
     }
+
+    fun createJemputSampah(
+        namaPengguna: String,
+        kategoriSampah: String,
+        beratSampah: String,
+        selectedHarga: String?,
+        tanggalPenjemputan: String,
+        alamatPenjemputan: String,
+        catatan: String
+    ): Map<String, String>? {
+        if (namaPengguna.isEmpty() || kategoriSampah.isEmpty() || beratSampah.isEmpty() ||
+            tanggalPenjemputan.isEmpty() || alamatPenjemputan.isEmpty()) {
+            return null
+        }
+
+        val beratSampahDouble = beratSampah.toDoubleOrNull() ?: return null
+        val hargaPerKgDouble = selectedHarga?.toDoubleOrNull() ?: return null
+
+        val totalHarga = beratSampahDouble * hargaPerKgDouble
+        val totalHargaString = String.format("%.3f", totalHarga)
+
+        return hashMapOf(
+            "Nama Pengguna" to namaPengguna,
+            "Kategori Sampah" to kategoriSampah,
+            "Berat Sampah" to beratSampah,
+            "Harga Sampah" to selectedHarga,
+            "Tanggal Penjemputan" to tanggalPenjemputan,
+            "Alamat Penjemputan" to alamatPenjemputan,
+            "Catatan" to catatan,
+            "Status" to "di proses",
+            "Pendapatan" to totalHargaString
+        )
+    }
+
+    private fun saveJemputSampah(jemputSampah: Map<String, String>) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users")
+                .document(currentUser.uid)
+                .collection("TrashSent")
+                .document()
+                .set(jemputSampah)
+                .addOnSuccessListener {
+                    Log.d("TAG", "DocumentSnapshot added with : $it")
+                    showToast(requireActivity(), "Data berhasil ditambahkan")
+                    clearForm()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error adding document", e)
+                    showToast(requireActivity(), "Gagal menambahkan data")
+                }
+        }
+    }
+
+    private fun clearForm() {
+        binding?.edNamaPengguna?.text = null
+        binding?.spinnerKategoriSampah?.setSelection(0)
+        binding?.edBeratSampah?.text = null
+        binding?.edTanggalPenjemputan?.text = null
+        binding?.edAlamatPenjemputan?.text = null
+        binding?.edCatatanTambahan?.text = null
+        binding?.tvHargaSampah?.text = null
+    }
+
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -187,9 +187,9 @@ class TrashFragment : Fragment() {
         datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
