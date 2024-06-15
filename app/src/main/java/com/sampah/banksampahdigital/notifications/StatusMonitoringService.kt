@@ -47,7 +47,7 @@ class StatusMonitoringService : Service() {
 
                     for (document in snapshots!!.documentChanges) {
                         if (document.type == DocumentChange.Type.MODIFIED) {
-                            val status = document.document.getString("Status")
+                            val status = document.document.getString("status")
                             val documentId = document.document.id
 
                             if (status != null && (status == "di terima" || status == "di tolak")) {

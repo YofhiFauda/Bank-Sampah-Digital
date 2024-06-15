@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import com.sampah.banksampahdigital.common.onboarding.OnboardingActivity
+import com.sampah.banksampahdigital.ui.onboarding.OnboardingActivity
 import androidx.core.view.forEach
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
