@@ -1,8 +1,6 @@
 package com.sampah.banksampahdigital.ui.dashboard
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,16 +8,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
+import com.sampah.banksampahdigital.ViewModelFactory
 import com.sampah.banksampahdigital.ui.onboarding.OnboardingActivity
 import com.sampah.banksampahdigital.databinding.FragmentDashboardBinding
+import com.sampah.banksampahdigital.utils.Utils.showToast
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Locale
@@ -33,7 +32,9 @@ class DashboardFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
-    private lateinit var firestore: FirebaseFirestore
+    private val viewModel: DashboardViewModel by viewModels {
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
     private var autoScrollTimer: Timer? = null
     private val autoScrollDelay: Long = 5000 // Delay in milliseconds for auto-scroll
@@ -52,94 +53,43 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
-
-
 
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val user = auth.currentUser
             if (user == null) {
                 redirectToLoginScreen()
+            } else {
+                viewModel.loadUserData(user.uid)
+                viewModel.loadTotalPengirimanDanPendapatan(user.uid)
             }
         }
-        setDashboard()
         setListCarousel()
-        getTotalPengirimanDanPendapatan()
+        setupView()
         // Check and request permissions
         checkAndRequestPermissions()
     }
 
-    private fun getTotalPengirimanDanPendapatan() {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            firestore.collection("users")
-                .document(currentUser.uid)
-                .collection("TrashSent")
-                .get(Source.SERVER) // Menggunakan sumber server sebagai sumber data
-                .addOnSuccessListener { documents ->
-                    var totalPengiriman = 0
-                    var totalPendapatan = 0.0
+    private fun setupView() {
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            Log.d("TAG", "Total Pendapatan: ${user.username}")
+            binding?.tvNameUser?.text = "Username: ${user?.username}"
+        }
 
-                    for (document in documents) {
-                        // Hitung total pengiriman
-                        totalPengiriman++
+        viewModel.totalPengiriman.observe(viewLifecycleOwner) { totalPengiriman ->
+            Log.d("TAG", "Total Pendapatan: $totalPengiriman")
+            binding?.tvTotalPengiriman?.text = "$totalPengiriman Pengiriman"
+        }
 
-                        // Ambil nilai pendapatan dari dokumen
-                        val pendapatanField = document.getString("pendapatan")
-                        val statusField = document.getString("status")
-
-                        if (statusField == "di terima") {
-                            // Konversi nilai pendapatan dari string ke double jika tidak null atau kosong
-                            if (!pendapatanField.isNullOrEmpty()) {
-                                try {
-                                    val pendapatan = pendapatanField.toDouble()
-                                    totalPendapatan += pendapatan * 1000
-                                } catch (e: NumberFormatException) {
-                                    Log.e("TAG", "Invalid Pendapatan value in document: ${document.id}")
-                                    // Tambahkan penanganan kesalahan di sini jika diperlukan
-                                }
-                            } else {
-                                Log.e("TAG", "Pendapatan field is empty or null in document: ${document.id}")
-                                // Tambahkan penanganan kesalahan di sini jika diperlukan
-                            }
-                        } else {
-                            Log.e("TAG", "Status field is not 'di terima' in document: ${document.id}")
-                            totalPendapatan = 0.0
-                        }
-                    }
-
-                    val localeId = Locale("in", "ID")
-                    val numberFormat = NumberFormat.getNumberInstance(localeId)
-                    numberFormat.minimumFractionDigits = 0
-                    numberFormat.maximumFractionDigits = 0
-                    val formattedPendapatan = numberFormat.format(totalPendapatan).replace(",", ".")
-
-
-
-                    val totalPengirimanFormat = String.format("$totalPengiriman Pengiriman")
-
-                    // Lakukan sesuatu dengan total pengiriman dan total pendapatan, misalnya tampilkan atau simpan
-                    Log.d("TAG", "Total Pengiriman: $totalPengiriman")
-                    binding?.tvTotalPengiriman?.text = totalPengirimanFormat
-
-
-                    Log.d("TAG", "Total Pendapatan: $formattedPendapatan")
-                    binding?.tvTotalPendapatan?.text = "Rp $formattedPendapatan"
-                }
-                .addOnFailureListener { exception ->
-                    Log.w("TAG", "Error getting documents: ", exception)
-                }
+        viewModel.totalPendapatan.observe(viewLifecycleOwner) { totalPendapatan ->
+            val localeId = Locale("in", "ID")
+            val numberFormat = NumberFormat.getNumberInstance(localeId)
+            numberFormat.minimumFractionDigits = 0
+            numberFormat.maximumFractionDigits = 0
+            val formattedPendapatan = numberFormat.format(totalPendapatan).replace(",", ".")
+            Log.d("TAG", "Total Pendapatan: $formattedPendapatan")
+            binding?.tvTotalPendapatan?.text = "Rp $formattedPendapatan"
         }
     }
-
-    fun formatRupiah(nominal: Double): String {
-        val formatter = NumberFormat.getCurrencyInstance(Locale("id", "ID")) as DecimalFormat
-        val symbols = formatter.decimalFormatSymbols
-        symbols.currencySymbol = "Rp "
-        formatter.decimalFormatSymbols = symbols
-        return formatter.format(nominal)
-    }
-
 
     private fun setListCarousel() {
         // Inisialisasi RecyclerView
@@ -175,35 +125,6 @@ class DashboardFragment : Fragment() {
         autoScrollTimer?.purge()
         autoScrollTimer = null
     }
-
-    @SuppressLint("SetTextI18n")
-    private fun setDashboard() {
-        val userId = firebaseAuth.currentUser
-
-        if (userId != null) {
-            // Mengambil data pengguna dari Firestore berdasarkan ID pengguna
-            firestore.collection("users").document(userId.uid)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        // Dokumen ditemukan, ambil data pengguna
-                        val username = document.getString("username")
-                        val email = document.getString("email")
-
-                        binding?.tvNameUser?.text = "Username: $username"
-
-                        // Lakukan apa pun dengan data pengguna yang diperoleh
-                        Log.d(ContentValues.TAG, "Username: $username, Email: $email")
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    // Gagal mengambil data pengguna
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-        }
-    }
     private fun redirectToLoginScreen() {
         val intent = Intent(requireContext(), OnboardingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -220,7 +141,10 @@ class DashboardFragment : Fragment() {
             )
         } else {
             // Permission already granted, proceed with the task
-            getTotalPengirimanDanPendapatan()
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser != null) {
+                viewModel.loadTotalPengirimanDanPendapatan(currentUser.uid)
+            }
         }
     }
 
@@ -235,10 +159,13 @@ class DashboardFragment : Fragment() {
             REQUEST_CODE_INTERNET_PERMISSION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // Permission granted, proceed with the task
-                    getTotalPengirimanDanPendapatan()
+                    val currentUser = firebaseAuth.currentUser
+                    if (currentUser != null) {
+                        viewModel.loadTotalPengirimanDanPendapatan(currentUser.uid)
+                    }
                 } else {
                     // Permission denied, show a message to the user
-                    Toast.makeText( requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+                    showToast(requireActivity(), "Permission denied")
                 }
                 return
             }
