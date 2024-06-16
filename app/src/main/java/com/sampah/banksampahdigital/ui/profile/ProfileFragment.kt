@@ -25,10 +25,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.R
+import com.sampah.banksampahdigital.ViewModelFactory
 import com.sampah.banksampahdigital.ui.login.LoginActivity
 import com.sampah.banksampahdigital.databinding.FragmentProfileBinding
 import com.sampah.banksampahdigital.utils.Media
@@ -41,8 +41,11 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
 
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
+
+
+    private val viewModel: ProfileViewModel by viewModels{
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
     private lateinit var currentPhotoPath: String
     private var getFile: File? = null
@@ -58,9 +61,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        firebaseAuth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -83,6 +83,14 @@ class ProfileFragment : Fragment() {
         setupExit()
         loadProfileImage()
         setupAction()
+    }
+
+    private fun setupView() {
+        viewModel.userData.observe(viewLifecycleOwner) { user ->
+            binding?.tvTitlePengguna?.text = user.username
+            binding?.tvEmail?.text = user.email
+
+        }
     }
 
     private fun setupAction() {
@@ -115,35 +123,6 @@ class ProfileFragment : Fragment() {
         }
 
         bottomSheetDialog.show()
-    }
-
-    private fun setupView() {
-        val userId = firebaseAuth.currentUser
-
-        if (userId != null) {
-            // Mengambil data pengguna dari Firestore berdasarkan ID pengguna
-            firestore.collection("users").document(userId.uid)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        // Dokumen ditemukan, ambil data pengguna
-                        val username = document.getString("username")
-                        val email = document.getString("email")
-
-                        binding?.tvTitlePengguna?.text = username
-                        binding?.tvEmail?.text = email
-
-                        // Lakukan apa pun dengan data pengguna yang diperoleh
-                        Log.d(ContentValues.TAG, "Username: $username, Email: $email")
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    // Gagal mengambil data pengguna
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -234,25 +213,6 @@ class ProfileFragment : Fragment() {
         editor.putString("profile_image_path", path)
         editor.apply()
     }
-//FUll IMAGE PREVIEW
-//    private fun showImageDialog() {
-//        val dialog = Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
-//        dialog.setContentView(R.layout.profil_image_dialog)
-//        val imageView = dialog.findViewById<ImageView>(R.id.imageView)
-//
-//        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-//        val path = sharedPreferences.getString("profile_image_path", null)
-//        if (!path.isNullOrEmpty()) {
-//            val file = File(requireContext().filesDir, path)
-//            if (file.exists()) {
-//                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-//                imageView.setImageBitmap(bitmap)
-//            }
-//        }
-//
-//        dialog.show()
-//    }
-
 
     private fun showImageDialog() {
         val dialog = Dialog(requireContext())
@@ -290,7 +250,7 @@ class ProfileFragment : Fragment() {
                 setTitle("Peringatan!")
                 setMessage("Apakah anda yakin ingin keluar?")
                 setPositiveButton("Ya") { _, _ ->
-                    firebaseAuth.signOut()
+                    viewModel.signOut()
                     val loginIntent = Intent(activity, LoginActivity::class.java)
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(loginIntent)
