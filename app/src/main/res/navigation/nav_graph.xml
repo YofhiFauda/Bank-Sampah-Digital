@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sampah.banksampahdigital.user.dashboard.DashboardFragment"
+        android:name="com.sampah.banksampahdigital.ui.dashboard.DashboardFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/trashFragment"
-        android:name="com.sampah.banksampahdigital.user.trash.TrashFragment"
+        android:name="com.sampah.banksampahdigital.ui.trash.TrashFragment"
         android:label="fragment_trash"
         tools:layout="@layout/fragment_trash">
         <action
@@ -23,19 +23,19 @@
 
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.sampah.banksampahdigital.user.category.CategoryFragment"
+        android:name="com.sampah.banksampahdigital.ui.category.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" />
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.sampah.banksampahdigital.user.history.HistoryFragment"
+        android:name="com.sampah.banksampahdigital.ui.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/profileragment"
-        android:name="com.sampah.banksampahdigital.user.profile.ProfileFragment"
+        android:name="com.sampah.banksampahdigital.ui.profile.ProfileFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_profile" />
 

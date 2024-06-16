@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greenDark"
-    tools:context=".user.profile.ProfileFragment">
+    tools:context=".ui.profile.ProfileFragment">
 
     <!--  Start Background Green Medium  -->
     <View
