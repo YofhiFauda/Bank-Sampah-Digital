@@ -25,6 +25,7 @@ import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 
+@Suppress("DEPRECATION")
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
@@ -72,7 +73,7 @@ class DashboardFragment : Fragment() {
     private fun setupView() {
         viewModel.user.observe(viewLifecycleOwner) { user ->
             Log.d("TAG", "Total Pendapatan: ${user.username}")
-            binding?.tvNameUser?.text = "Username: ${user?.username}"
+            binding?.tvNameUser?.text = "${user?.username}"
         }
 
         viewModel.totalPengiriman.observe(viewLifecycleOwner) { totalPengiriman ->
@@ -148,7 +149,6 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

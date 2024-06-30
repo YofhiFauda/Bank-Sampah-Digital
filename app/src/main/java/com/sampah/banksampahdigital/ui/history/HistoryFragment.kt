@@ -70,14 +70,14 @@ class HistoryFragment : Fragment() {
 
                     // Membagi data berdasarkan status
                     val inProcessData = data.filter { it.getString("status") == "di proses" }
-                    val rejectData = data.filter { it.getString("status") == "di tolak" }
                     val acceptedData = data.filter { it.getString("status") == "di terima" }
+                    val rejectData = data.filter { it.getString("status") == "di tolak" }
 
                     // Menggabungkan kembali data dengan urutan yang diinginkan
                     val sortedData = mutableListOf<DocumentSnapshot>()
                     sortedData.addAll(inProcessData)
-                    sortedData.addAll(rejectData)
                     sortedData.addAll(acceptedData)
+                    sortedData.addAll(rejectData)
 
                     // Mengupdate adapter dengan data yang diurutkan
                     adapter = HistoryAdapter(sortedData)
