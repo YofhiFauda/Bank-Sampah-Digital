@@ -77,22 +77,21 @@ harganya, serta mengelola data dengan lebih teratur. Selain meningkatkan efisien
 </table>
 
 ## TODO 
-- Pembuatan Konten pada Dashboard user
-- Pembuatan dari sisi Admin
-- Penukaran Point atau Saldo
-- Perbaikan UI dan UX
-- Perbaikan pada profile pengguna
-- Melakukan Tracking Sampah
-- Pembuatan Thema gelap
-- Penggunaan Room dan Pagging 3
-- Penggunaan Retorofit dan Hilt / Dagger
-- Fix Logout For Account
-- Using Android Jetpack Compose
+- [ ] Pembuatan Konten pada Dashboard user
+- [ ] Pembuatan dari sisi Admin
+- [ ] Penukaran Point atau Saldo
+- [ ] Perbaikan UI dan UX
+- [ ] Perbaikan pada profile pengguna
+- [ ] Melakukan Tracking Sampah
+- [ ] Pembuatan Thema gelap
+- [ ] Penggunaan Room dan Pagging 3
+- [ ] Penggunaan Retorofit dan Hilt / Dagger
+- [ ] Using Android Jetpack Compose
 
 
 ## KEBIJAKAN PRIVASI APLIKASI BANK SAMPAH DIGITAL
 
-Tingkatkan Perlindungan Privasi Anda! Lihat Kebijakan Privasi Bank Sampah Digital [di sini](policy-privacy.md)
+Tingkatkan Perlindungan Privasi Anda! Lihat Kebijakan Privasi Bank Sampah Digital [di sini](https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/privacy-policy.md)
 
 
 ## Contribution
