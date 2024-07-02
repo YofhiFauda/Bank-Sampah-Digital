@@ -65,14 +65,14 @@ harganya, serta mengelola data dengan lebih teratur. Selain meningkatkan efisien
 
 <table>
   <tr>
-    <td><img src="./assets/media/splashscreen.png" alt="Splash Screen" width="200"/></td>
-    <td><img src="./assets/media/login.png" alt="Login" width="200"/></td>
-    <td><img src="./assets/media/dashboard.png" alt="Dashboard" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/splashscreen.png" alt="Splash Screen" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/login.png" alt="Login" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/dashboard.png" alt="Dashboard" width="200"/></td>
   </tr>
   <tr>
-    <td><img src="./assets/media/jemputsampah.png" alt="Jemput Sampah" width="200"/></td>
-    <td><img src="./assets/media/historysampah.png" alt="History Sampah" width="200"/></td>
-    <td><img src="./assets/media/notifikasisampah.png" alt="Notifikasi Sampah" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/jemputsampah.png" alt="Jemput Sampah" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/historysampah.png" alt="History Sampah" width="200"/></td>
+    <td><img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/notifikasisampah.png" alt="Notifikasi Sampah" width="200"/></td>
   </tr>
 </table>
 
