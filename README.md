@@ -2,7 +2,7 @@
 <br>
 
 <p align="center">
-<img src="./blob/master/app/assets/media/Bank%20Sampah%20Digital.png" alt="banksampahdigital-overview"></img>
+<img src="https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/app/assets/media/Bank%20Sampah%20Digital.png" alt="banksampahdigital-overview"></img>
 </p>
 
 <br>
