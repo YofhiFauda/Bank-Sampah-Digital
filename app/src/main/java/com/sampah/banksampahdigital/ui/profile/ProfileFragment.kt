@@ -95,7 +95,8 @@ class ProfileFragment : Fragment() {
 
     private fun setupAction() {
         binding?.layoutDataPribadi?.setOnClickListener {
-            Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), DataPribadiActivity::class.java)
+            startActivity(intent)
         }
         binding?.layoutInformasiPenukaran?.setOnClickListener {
             Toast.makeText(this.context, "This feature is coming soon", Toast.LENGTH_SHORT).show()

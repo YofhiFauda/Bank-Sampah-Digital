@@ -134,9 +134,23 @@
     <string name="error_pick_image" translatable="false">Error pick image</string>
     <string name="error_showing_camera" translatable="false">Error showing camera</string>
 
+    <!-- Profile Content   -->
     <string name="ubah_gambar_profil" translatable="false">Ubah gambar profil</string>
     <string name="ambil_foto_menggunakan_kamera" translatable="false">Ambil foto menggunakan kamera</string>
     <string name="ambil_dari_galeri" translatable="false">Ambil dari galeri</string>
+
+    <!--  data_pribadi content  -->
+    <string name="edit_data_pribadi" translatable="false">Edit Data Pribadi</string>
+    <string name="title_emailPengguna" translatable="false">Email</string>
+    <string name="hint_emailPengguna" translatable="false">Masukan Email Anda</string>
+
+    <string name="title_noTeleponPengguna" translatable="false">No Telepon</string>
+    <string name="hint_noTeleponPengguna" translatable="false">Masukan No Telepon Anda</string>
+
+    <string name="title_alamatPengguna" translatable="false">Alamat</string>
+    <string name="hint_alamatPengguna" translatable="false">Masukan Alamat Anda</string>
+
+    <string name="update_data_pribadi" translatable="false">Update Data Pribadi</string>
 
 
 </resources>
