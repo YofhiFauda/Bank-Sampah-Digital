@@ -91,7 +91,7 @@ harganya, serta mengelola data dengan lebih teratur. Selain meningkatkan efisien
 
 ## KEBIJAKAN PRIVASI APLIKASI BANK SAMPAH DIGITAL
 
-Tingkatkan Perlindungan Privasi Anda! Lihat Kebijakan Privasi Bank Sampah Digital [di sini](https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/privacy-policy.md)
+Tingkatkan Perlindungan Privasi Anda! Lihat Kebijakan Privasi Bank Sampah Digital [disini](https://github.com/YofhiFauda/Bank-Sampah-Digital/blob/master/privacy-policy.md)
 
 
 ## Contribution
