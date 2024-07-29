@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/image_success_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/success_animation"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_titleCongratulations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/greenDeep"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="24sp"
+        android:text="@string/congratulations"
+        app:layout_constraintTop_toBottomOf="@+id/image_success_animation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_descriptionCongratulations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/greenDeep"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/desc_congratulations"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleCongratulations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--  Start of Button Track Sampah  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_track_sampah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="@color/greenDark"
+        android:text="@string/track_sampah"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_descriptionCongratulations" />
+    <!--  End of Button Track Sampah  -->
+
+    <!--  Start of Button Track Sampah  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_kembali"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/kembali"
+        android:textColor="@color/greenDark"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/greenDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_track_sampah" />
+    <!--  End of Button Track Sampah  -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.40"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

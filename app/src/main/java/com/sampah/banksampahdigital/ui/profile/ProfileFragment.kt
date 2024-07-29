@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sampah.banksampahdigital.R
 import com.sampah.banksampahdigital.ViewModelFactory
@@ -33,6 +34,7 @@ import com.sampah.banksampahdigital.ui.login.LoginActivity
 import com.sampah.banksampahdigital.databinding.FragmentProfileBinding
 import com.sampah.banksampahdigital.utils.Media
 import com.yalantis.ucrop.UCrop
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 
@@ -40,8 +42,6 @@ import java.io.FileOutputStream
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
-
-
 
     private val viewModel: ProfileViewModel by viewModels{
         ViewModelFactory.getInstance(requireActivity())
@@ -209,10 +209,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun saveImagePathToPreferences(path: String) {
-        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("profile_image_path", path)
-        editor.apply()
+        viewModel.saveImagePath(path)
     }
 
     private fun showImageDialog() {
@@ -220,27 +217,32 @@ class ProfileFragment : Fragment() {
         dialog.setContentView(R.layout.profil_image_dialog)
         val imageView = dialog.findViewById<ImageView>(R.id.imageView)
 
-        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val path = sharedPreferences.getString("profile_image_path", null)
-        if (!path.isNullOrEmpty()) {
-            val file = File(requireContext().filesDir, path)
-            if (file.exists()) {
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                imageView.setImageBitmap(bitmap)
+        // Menggunakan lifecycleScope untuk mengumpulkan Flow
+        lifecycleScope.launch {
+            viewModel.getImagePath().collect { path ->
+                if (!path.isNullOrEmpty()) {
+                    val file = File(requireContext().filesDir, path)
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        imageView.setImageBitmap(bitmap)
+                    }
+                }
             }
         }
-
         dialog.show()
     }
 
+
     private fun loadProfileImage() {
-        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val path = sharedPreferences.getString("profile_image_path", null)
-        if (!path.isNullOrEmpty()) {
-            val file = File(requireContext().filesDir, path)
-            if (file.exists()) {
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                binding?.profileImage?.setImageBitmap(bitmap)
+        lifecycleScope.launch {
+            viewModel.getImagePath().collect { path ->
+                if (!path.isNullOrEmpty()) {
+                    val file = File(requireContext().filesDir, path)
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        binding?.profileImage?.setImageBitmap(bitmap)
+                    }
+                }
             }
         }
     }

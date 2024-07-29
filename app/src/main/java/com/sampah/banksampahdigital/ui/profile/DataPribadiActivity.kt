@@ -7,13 +7,18 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.sampah.banksampahdigital.R
+import com.sampah.banksampahdigital.ViewModelFactory
 import com.sampah.banksampahdigital.databinding.ActivityDataPribadiBinding
+import kotlinx.coroutines.launch
 import java.io.File
 
 @Suppress("DEPRECATION")
@@ -23,6 +28,9 @@ class DataPribadiActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private var isEdit = false
+    private val viewModel: ProfileViewModel by viewModels{
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +53,20 @@ class DataPribadiActivity : AppCompatActivity() {
     }
 
     private fun loadProfileImage() {
-        val sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val path = sharedPreferences.getString("profile_image_path", null)
-        if (!path.isNullOrEmpty()) {
-            val file = File(this.filesDir, path)
-            if (file.exists()) {
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                binding.profileImage.setImageBitmap(bitmap)
+        lifecycleScope.launch {
+            viewModel.getImagePath().collect { path ->
+                if (!path.isNullOrEmpty()) {
+                    val file = File(filesDir, path)
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        binding?.profileImage?.setImageBitmap(bitmap)
+                    }
+                }
             }
         }
     }
+
+
 
     private fun loadDataUser() {
         val currentUser = firebaseAuth.currentUser

@@ -3,10 +3,13 @@ package com.sampah.banksampahdigital.data.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.data.model.User
+import com.sampah.banksampahdigital.datastore.PreferencesHelper
+import kotlinx.coroutines.flow.Flow
 
 class ProfileRepository(
     private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
+    private val preferencesHelper: PreferencesHelper
 ) {
     fun getUserData(onSuccess: (User) -> Unit, onFailure: (Exception) -> Unit) {
         val userId = firebaseAuth.currentUser?.uid
@@ -33,16 +36,24 @@ class ProfileRepository(
         firebaseAuth.signOut()
     }
 
+    suspend fun saveImagePath(path: String) {
+        preferencesHelper.saveImagePath(path)
+    }
+
+    fun getImagePath(): Flow<String?> {
+        return preferencesHelper.profileImagePath
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: ProfileRepository? = null
         fun getInstance(
             firebaseAuth: FirebaseAuth,
             firestore: FirebaseFirestore,
+            preferencesHelper: PreferencesHelper
         ): ProfileRepository =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: ProfileRepository(firebaseAuth, firestore)
+                INSTANCE ?: ProfileRepository(firebaseAuth, firestore, preferencesHelper)
             }.also { INSTANCE = it }
     }
-
 }

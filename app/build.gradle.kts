@@ -56,15 +56,18 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.google.firebase:firebase-firestore:25.0.0")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+    //Lifecycle
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     //navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation ("androidx.activity:activity-ktx:1.9.0")
-    implementation("androidx.fragment:fragment-ktx:1.7.1")
+    implementation ("androidx.activity:activity-ktx:1.9.1")
+    implementation("androidx.fragment:fragment-ktx:1.8.2")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation ("androidx.annotation:annotation:1.8.0")
+    implementation ("androidx.annotation:annotation:1.8.1")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
     // WorkManager
@@ -73,6 +76,7 @@ dependencies {
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
+    //Crop Image
     implementation ("com.github.yalantis:ucrop:2.2.7")
 
     //coroutines
@@ -84,31 +88,31 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     //DataStore
-    implementation ("androidx.datastore:datastore-core:1.1.1")
+    implementation("androidx.datastore:datastore:1.1.1")
     implementation ("androidx.datastore:datastore-preferences:1.1.1")
-    implementation ("androidx.datastore:datastore-preferences-core:1.1.1")
 
-    implementation("androidx.compose.ui:ui-graphics-android:1.6.7")
-    implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.0")
-    implementation("androidx.activity:activity-ktx:1.9.0")
+    //Lotties File
+    implementation("com.airbnb.android:lottie:6.4.1")
+
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.8")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.2")
 
     //CameraX
     implementation ("com.google.guava:guava:32.0.1-android")
-    implementation ("androidx.camera:camera-camera2:1.4.0-beta01")
-    implementation("androidx.camera:camera-view:1.3.3")
-    implementation("androidx.camera:camera-lifecycle:1.3.3")
-    implementation("androidx.activity:activity:1.9.0")
+    implementation ("androidx.camera:camera-camera2:1.4.0-beta02")
+    implementation("androidx.camera:camera-view:1.3.4")
+    implementation("androidx.camera:camera-lifecycle:1.3.4")
 
     // Unit testing dependencies
-    debugImplementation("androidx.fragment:fragment-testing:1.7.1")
+    debugImplementation("androidx.fragment:fragment-testing:1.8.2")
 
-    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
-    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation("androidx.test.ext:junit-ktx:1.2.1")
+    testImplementation("androidx.test:runner:1.6.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("org.mockito:mockito-core:4.6.1")
-    testImplementation("org.mockito:mockito-inline:4.6.1") // Tambahkan ini
-    testImplementation("androidx.test:core:1.5.0") // Tambahkan ini
+    testImplementation("org.mockito:mockito-inline:4.6.1")
+    testImplementation("androidx.test:core:1.5.0")
 
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("org.mockito:mockito-android:4.6.1")

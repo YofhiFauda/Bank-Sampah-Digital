@@ -151,6 +151,10 @@
     <string name="hint_alamatPengguna" translatable="false">Masukan Alamat Anda</string>
 
     <string name="update_data_pribadi" translatable="false">Update Data Pribadi</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="desc_congratulations">Sampah Anda telah diterima dan sedang ditangani</string>
+    <string name="track_sampah">Track Sampah</string>
+    <string name="kembali">Kembali</string>
 
 
 </resources>
