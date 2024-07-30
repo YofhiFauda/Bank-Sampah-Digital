@@ -102,6 +102,7 @@ dependencies {
     implementation ("androidx.camera:camera-camera2:1.4.0-beta02")
     implementation("androidx.camera:camera-view:1.3.4")
     implementation("androidx.camera:camera-lifecycle:1.3.4")
+    implementation("androidx.activity:activity:1.9.1")
 
     // Unit testing dependencies
     debugImplementation("androidx.fragment:fragment-testing:1.8.2")

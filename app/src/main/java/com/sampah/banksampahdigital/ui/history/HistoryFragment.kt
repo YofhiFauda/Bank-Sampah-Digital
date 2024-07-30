@@ -85,16 +85,16 @@ class HistoryFragment : Fragment() {
                     binding?.rvHistory?.adapter = adapter
 
                     // Menyiarkan siaran ketika ada perubahan status
-                    for (document in data) {
-                        val status = document.getString("status")
-                        val documentId = document.id
-                        if (status != null && (status == "di terima" || status == "di tolak")) {
-                            val intent = Intent("com.sampah.banksampahdigital.STATUS_CHANGED")
-                            intent.putExtra("status", status)
-                            intent.putExtra("documentId", documentId)
-                            requireContext().sendBroadcast(intent)
-                        }
-                    }
+//                    for (document in data) {
+//                        val status = document.getString("status")
+//                        val documentId = document.id
+//                        if (status != null && (status == "di terima" || status == "di tolak")) {
+//                            val intent = Intent("com.sampah.banksampahdigital.STATUS_CHANGED")
+//                            intent.putExtra("status", status)
+//                            intent.putExtra("documentId", documentId)
+//                            requireContext().sendBroadcast(intent)
+//                        }
+//                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)

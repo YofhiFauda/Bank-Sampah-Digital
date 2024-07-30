@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".ui.trash.sucess.SuccessJemputSampahFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/image_success_animation"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         app:lottie_rawRes="@raw/success_animation"
         app:lottie_loop="false"
         app:lottie_autoPlay="true"
         android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -51,7 +52,7 @@
         android:id="@+id/btn_track_sampah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="65dp"
         android:layout_marginHorizontal="20dp"
         android:backgroundTint="@color/greenDark"
         android:text="@string/track_sampah"
@@ -67,11 +68,12 @@
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="20dp"
         android:text="@string/kembali"
         android:textColor="@color/greenDark"
         app:cornerRadius="8dp"
+        android:paddingHorizontal="45dp"
         app:strokeColor="@color/greenDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +86,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.40"
+        app:layout_constraintGuide_percent="0.45"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline

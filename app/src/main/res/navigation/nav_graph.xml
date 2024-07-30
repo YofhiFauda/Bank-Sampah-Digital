@@ -17,7 +17,18 @@
         android:label="fragment_trash"
         tools:layout="@layout/fragment_trash">
         <action
-            android:id="@+id/action_sampah"
+            android:id="@+id/action_trashFragment_to_successJemputSampahFragment"
+            app:destination="@id/successJemputSampahFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/successJemputSampahFragment"
+        android:name="com.sampah.banksampahdigital.ui.trash.sucess.SuccessJemputSampahFragment"
+        android:label="Success Jemput Sampah Fragment"
+        tools:layout="@layout/fragment_success_jemput_sampah">
+
+        <action
+            android:id="@+id/action_successJemputSampahFragment_to_trashFragment"
             app:destination="@id/trashFragment" />
     </fragment>
 

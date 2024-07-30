@@ -442,7 +442,6 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_catatanTambahan" />
     <!--  End of Button Register  -->
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVertical"
         android:layout_width="wrap_content"
@@ -451,8 +450,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

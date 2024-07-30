@@ -1,14 +1,10 @@
 package com.sampah.banksampahdigital
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import com.sampah.banksampahdigital.ui.onboarding.OnboardingActivity
-import androidx.core.view.forEach
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sampah.banksampahdigital.databinding.ActivityMainBinding
@@ -41,6 +37,32 @@ class MainActivity : AppCompatActivity() {
 
         setupNavController()
         setupBottomNavigationView()
+        setupBroadcast()
+    }
+
+    private fun setupBroadcast() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users")
+                .document(currentUser.uid)
+                .collection("TrashSent")
+                .get()
+                .addOnSuccessListener { result ->
+                    val data = result.documents
+
+                    // Menyiarkan siaran ketika ada perubahan status
+                    for (document in data) {
+                        val status = document.getString("status")
+                        val documentId = document.id
+                        if (status != null && (status == "di terima" || status == "di tolak")) {
+                            val intent = Intent("com.sampah.banksampahdigital.STATUS_CHANGED")
+                            intent.putExtra("status", status)
+                            intent.putExtra("documentId", documentId)
+                            this.sendBroadcast(intent)
+                        }
+                }
+            }
+        }
     }
 
     private fun setupNavController() {

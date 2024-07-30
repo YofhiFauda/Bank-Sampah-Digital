@@ -18,12 +18,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sampah.banksampahdigital.data.model.JemputSampah
 import java.text.NumberFormat
 
 class TrashFragment : Fragment() {
     private var _binding: FragmentTrashBinding? = null
     private val binding get() = _binding
+
 
     private val viewModel: TrashViewModel by viewModels {
         ViewModelFactory.getInstance(requireActivity())
@@ -49,6 +51,8 @@ class TrashFragment : Fragment() {
         setupObservers()
 
         binding?.btnSimpan?.setOnClickListener {
+            Log.d("Navigation", "Button Simpan ditekan")
+
             buatJemputSampah()
         }
         binding?.edTanggalPenjemputan?.setOnClickListener {
@@ -65,9 +69,20 @@ class TrashFragment : Fragment() {
             if (success) {
                 showToast(requireActivity(), "Data berhasil ditambahkan")
                 clearForm()
+                navigateToSuccessFragment()
             } else {
                 showToast(requireActivity(), "Gagal menambahkan data")
             }
+        }
+    }
+
+    private fun navigateToSuccessFragment() {
+        Log.d("Navigation", "Navigating to SuccessJemputSampahFragment")
+        try {
+            val action = TrashFragmentDirections.actionTrashFragmentToSuccessJemputSampahFragment()
+            findNavController().navigate(action)
+        } catch (e: IllegalArgumentException) {
+            Log.e("Navigation", "Navigation action/destination not found: ${e.message}")
         }
     }
 
@@ -175,6 +190,12 @@ class TrashFragment : Fragment() {
         datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TrashFragment", "TrashFragment onResume called")
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
