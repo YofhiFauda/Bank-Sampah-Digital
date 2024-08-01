@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Bank Sampah Digital</string>
+
+    <!--  Button  -->
+    <string name="masuk" translatable="false">Masuk</string>
+    <string name="daftar" translatable="false">Daftar</string>
+
+    <!--  Announce  -->
+    <string name="invalid_email" translatable="false">Format email is invalid!</string>
+    <string name="min_length_char" translatable="false">Minimal Length %1$d characters</string>
+    <string name="message_validation" translatable="false">Enter your %1$s</string>
+    <string name="login_error" translatable="false">Cannot Login, please check again!</string>
+    <string name="signup_error" translatable="false">Cannot Signup, please check again!</string>
+
+    <!--  Form Auth  -->
+    <string name="username" translatable="false">Username</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="konfirm_passowrd" translatable="false">Konfirmasi Password</string>
+
+    <!--  Registrasi  -->
+    <string name="title_registrasi" translatable="false">Registrasi</string>
+    <string name="subtitle_registrasi" translatable="false">Buat akun baru anda</string>
+    <string name="helper_register" translatable="false">Sudah punya akun?</string>
+
+    <!--  Login  -->
+    <string name="title_login" translatable="false">Selamat Datang</string>
+    <string name="subtitle_login" translatable="false">Login menggunakan akun anda</string>
+    <string name="helper_login" translatable="false">Belum punya akun?</string>
+    <string name="sign_out" translatable="false">Logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

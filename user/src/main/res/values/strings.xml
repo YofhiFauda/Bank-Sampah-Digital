@@ -1,0 +1,131 @@
+<resources>
+    <string name="app_name">Bank Sampah Digital</string>
+
+    <!--  Announce  -->
+    <string name="invalid_email" translatable="false">Format email is invalid!</string>
+    <string name="min_length_char" translatable="false">Minimal Length %1$d characters</string>
+    <string name="message_validation" translatable="false">Enter your %1$s</string>
+    <string name="login_error" translatable="false">Cannot Login, please check again!</string>
+    <string name="signup_error" translatable="false">Cannot Signup, please check again!</string>
+
+    <!--  Navigation Bar  -->
+    <string name="dashboard" translatable="false">Dashboard</string>
+    <string name="sampah" translatable="false">Sampah</string>
+    <string name="kategori" translatable="false">Kategori</string>
+    <string name="riwayat" translatable="false">Riwayat</string>
+    <string name="profile" translatable="false">Profile</string>
+
+    <!--  Dashboard Content  -->
+    <string name="total_pengiriman" translatable="false">Total Pengiriman</string>
+    <string name="total_saldo" translatable="false">Saldo Anda</string>
+
+    <string name="title_slider1" translatable="false">Selamat datang di\nAplikasi Bank Sampah!</string>
+    <string name="subtitle_slider1" translatable="false">Mulailah Menabung Sampah Anda, dan Bersama-sama Kita Mengubah Dunia Menjadi Tempat yang Lebih Bersih</string>
+
+    <string name="title_slider2" translatable="false">Aksi Kecil Dampak Besar!</string>
+    <string name="subtitle_slider2" translatable="false">Setiap Aksi Kecil yang Anda Lakukan Hari Ini Akan Membawa Dampak yang Luar Biasa untuk Generasi Mendatang!</string>
+
+    <string name="title_slider3" translatable="false">Tukarkan Poin Anda, Dapatkan Manfaat Lebih</string>
+    <string name="subtitle_slider3" translatable="false">Tukarkan Poin Anda dengan Barang Berguna atau Uang Tunai, Menjadi Reward untuk Kontribusi Anda terhadap Lingkungan!"</string>
+
+    <string name="title_slider4" translatable="false">Sampah Bukan Akhir Tapi Awal yang Berharga!</string>
+    <string name="subtitle_slider4" translatable="false">Sampah Bukanlah Akhir dari Perjalanan, Tetapi Awal yang Berharga untuk Menciptakan Masa Depan yang Lebih Berkelanjutan dan Hijau!</string>
+
+    <string name="title_slider5" translatable="false">Tukarkan Sampah Plastikmu Sekarang!</string>
+    <string name="subtitle_slider5" translatable="false">Aplikasi Bank Sampah adalah solusi untuk menyelesaikan masalah sosial tentang kebersihan lingkungan </string>
+
+    <!--  Jemput Sampah Content  -->
+    <string name="title_jemputSampah" translatable="false">Jemput Sampah</string>
+    <string name="warning_jemputSampah" translatable="false">Mohon isi data di bawah ini dengan benar</string>
+
+    <string name="title_namaPengguna" translatable="false">Nama Pengguna</string>
+    <string name="hint_namaPengguna" translatable="false">Masukan Nama Lengkap</string>
+
+    <string name="title_kategoriSampah" translatable="false">Kategori Sampah</string>
+
+    <string name="title_beratSampah" translatable="false">Berat (kg)</string>
+    <string name="hint_beratSampah" translatable="false">5 Kg</string>
+
+    <string name="title_hargaSampah" translatable="false">Harga (per kg)</string>
+    <string name="hint_hargaSampah" translatable="false">Rp 3.000</string>
+
+    <string name="title_tanggalJemput" translatable="false">Tanggal Penjemputan</string>
+    <string name="hint_tanggalJemput" translatable="false">Masukan Tanggal</string>
+
+    <string name="title_alamatJemput" translatable="false">Alamat Penjemputan</string>
+    <string name="hint_alamatJemput" translatable="false">Masukan Alamat</string>
+
+    <string name="title_catatan" translatable="false">Catatan Tambahan (Opsional)</string>
+    <string name="hint_catatan" translatable="false">Masukan Catatan Tambahan Anda</string>
+
+    <string name="simpan" translatable="false">Simpan</string>
+
+    <!-- Jenis Sampah Content   -->
+    <string name="title_Jenis_sampah" translatable="false">Jenis Sampah</string>
+    <string name="subtitle_Jenis_sampah1" translatable="false">Sampah merupakan hasil produksi manusia yang tidak akan pernah luput dari kehidupan sehari-hari. Lalu, jenis-jenis sampah apa yang biasanya kita hasilkan? Yuk, kenali di sini</string>
+    <string name="subtitle_Jenis_sampah2" translatable="false">Sampah jika dibiarkan saja akan mengganggu kebersihan lingkungan secara umum. Sampah dapat dibedakan menjadi dua macam, yaitu:</string>
+
+    <string name="title_anorganik" translatable="false">Sampah Padat (Anorganik)</string>
+    <string name="subtitle_anorganik1" translatable="false">Sampah anorganik adalah sampah yang terdiri atas bahan-bahan anorganik. Contoh bahan-bahan anorganik adalah bahan logam, plastik, kaca, karet, dan kaleng. Sifat sampah anorganik adalah tahan lama dan sukar membusuk.</string>
+    <string name="subtitle_anorganik2" translatable="false">Sampah ini tidak mudah diuraikan oleh mikroorganisme tanah. Apabila dibuang sembarangan, sampah anorganik dapat menimbulkan pencemaran tanah</string>
+
+    <string name="title_organik" translatable="false">Sampah Basah (Organik)</string>
+    <string name="subtitle_organik1" translatable="false">Sampah organik adalah sampah yang terdiri atas bahan-bahan organik. Sifat sampah organik adalah tidak tahan lama dan cepat membusuk. Biasanya sampah jenis ini berasal dari makhluk hidup. Contohnya adalah sayur-sayuran, buah-buah yang membusuk, sisa nasi, daun, dan sebagainya.</string>
+    <string name="subtitle_organik2" translatable="false">Sampah organik mudah diuraikan mikroorganisme tanah. Hanya saja jenis sampah akan menimbulkan bau kurang sedap jika tidak dikelola dengan baik.</string>
+
+
+    <!--  History Content  -->
+    <string name="riwayat_anda" translatable="false">Riwayat Anda</string>
+
+    <string name="nama_pengguna" translatable="false">Solikin</string>
+    <string name="tanggal" translatable="false">6 Januari 2024</string>
+    <string name="jenis_sampah" translatable="false">Sampah Plastik</string>
+    <string name="berat" translatable="false">Berat: 20 Kg</string>
+    <string name="pendapatan" translatable="false">Pendapatan: Rp 30.000</string>
+    <string name="status" translatable="false">di proses</string>
+
+
+    <!-- Profile Content -->
+    <string name="data_pribadi" translatable="false">Data Pribadi</string>
+    <string name="informasi_penukaran" translatable="false">Informasi Penukaran</string>
+    <string name="penukaran_point" translatable="false">Penukaran Point</string>
+    <string name="riwayat_penukaran" translatable="false">Riwayat Penukaran</string>
+    <string name="thema" translatable="false">Thema</string>
+    <string name="favorit" translatable="false">Favorit</string>
+    <string name="notifikasi" translatable="false">Notifikasi</string>
+    <string name="keluar" translatable="false">Keluar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_admin" translatable="false">Admin</string>
+    <string name="title_user" translatable="false">User</string>
+    <string name="next" translatable="false">Next</string>
+
+    <string name="permission_denied" translatable="false">Can\'t get permission</string>
+    <string name="error_pick_image" translatable="false">Error pick image</string>
+    <string name="error_showing_camera" translatable="false">Error showing camera</string>
+
+    <!-- Profile Content   -->
+    <string name="ubah_gambar_profil" translatable="false">Ubah gambar profil</string>
+    <string name="ambil_foto_menggunakan_kamera" translatable="false">Ambil foto menggunakan kamera</string>
+    <string name="ambil_dari_galeri" translatable="false">Ambil dari galeri</string>
+
+    <!--  data_pribadi content  -->
+    <string name="edit_data_pribadi" translatable="false">Edit Data Pribadi</string>
+    <string name="title_emailPengguna" translatable="false">Email</string>
+    <string name="hint_emailPengguna" translatable="false">Masukan Email Anda</string>
+
+    <string name="title_noTeleponPengguna" translatable="false">No Telepon</string>
+    <string name="hint_noTeleponPengguna" translatable="false">Masukan No Telepon Anda</string>
+
+    <string name="title_alamatPengguna" translatable="false">Alamat</string>
+    <string name="hint_alamatPengguna" translatable="false">Masukan Alamat Anda</string>
+
+    <string name="update_data_pribadi" translatable="false">Update Data Pribadi</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="desc_congratulations">Sampah Anda telah diterima dan sedang ditangani</string>
+    <string name="track_sampah">Track Sampah</string>
+    <string name="kembali">Kembali</string>
+
+
+</resources>

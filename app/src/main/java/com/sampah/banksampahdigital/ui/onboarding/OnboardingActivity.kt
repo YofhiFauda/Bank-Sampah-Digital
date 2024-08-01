@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.sampah.banksampahdigital.databinding.ActivityOnboardingBinding
 import com.sampah.banksampahdigital.R
-import com.sampah.banksampahdigital.ui.login.LoginActivity
+import com.sampah.banksampahdigital.ui.welcome.WelcomeActivity
 
 class OnboardingActivity : AppCompatActivity() {
 
@@ -34,8 +34,10 @@ class OnboardingActivity : AppCompatActivity() {
         setupView(onboardingItem)
 
         if (restorePrefData()){
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent()
+            intent.setClassName(this, "com.sampah.common.login.LoginActivity")
             startActivity(intent)
+            finish()
         }
 
         position = screenViewPager!!.currentItem
@@ -47,7 +49,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
             if (position == onboardingItem.size) {
                 savePrefData()
-                val intent = Intent(applicationContext, LoginActivity::class.java)
+                val intent = Intent(applicationContext, WelcomeActivity::class.java)
                 startActivity(intent)
             }
         }

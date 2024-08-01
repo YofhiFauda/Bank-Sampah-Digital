@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+    tools:context=".login.LoginActivity">
+
+    <!--  Start of Image  -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/title_login"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        android:layout_marginHorizontal="20dp"
+        app:srcCompat="@drawable/img_login" />
+    <!--  End of Image  -->
+
+    <!--  Start of Title  -->
+    <TextView
+        android:id="@+id/tv_titleLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/title_login"
+        android:textColor="@color/greenDeep"
+        android:textSize="32sp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal"
+        app:layout_constraintBottom_toTopOf="@+id/tv_subtitleLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--  End of Title  -->
+
+    <!--  Start of Subtitle  -->
+    <TextView
+        android:id="@+id/tv_subtitleLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/subtitle_login"
+        android:textColor="@color/greenDeep"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--  End of Subtitle  -->
+
+    <!--  Start of TextInput Layout Email  -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailEditTextLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/greenMedium"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/greenLight"
+        app:boxStrokeErrorColor="@color/redLight"
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitleLogin">
+
+        <com.sampah.common.custom.CustomEmail
+            android:id="@+id/ed_login_email"
+            android:hint="@string/email"
+            android:minHeight="50dp"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/greenDeep"
+            android:autofillHints="emailAddress"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="14sp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--  End of TextInput Layout Email  -->
+
+    <!--  Start of TextInput Layout Password  -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordEditTextLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
+        android:textColorHint="@color/greenMedium"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/greenLight"
+        app:boxStrokeErrorColor="@color/redLight">
+
+        <com.sampah.common.custom.CustomPassword
+            android:id="@+id/ed_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:textColor="@color/greenDeep"
+            android:autofillHints="password"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="14sp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:minHeight="50dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--  End of TextInput Layout Password  -->
+
+
+    <!--  Start of Button Register  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:backgroundTint="@color/greenDark"
+        app:cornerRadius="8dp"
+        android:text="@string/masuk"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
+    <!--  End of Button Register  -->
+
+    <!--  Start of Helper register -->
+    <LinearLayout
+        android:id="@+id/tv_haveAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_helperLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/helper_login"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_daftar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/daftar"
+            android:textColor="@color/greenDeep"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </LinearLayout>
+    <!--  End of Helper register  -->
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.50121653"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
