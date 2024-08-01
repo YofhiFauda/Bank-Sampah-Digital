@@ -18,3 +18,4 @@ rootProject.name = "Bank Sampah Digital"
 include(":app")
 include(":common")
 include(":user")
+include(":admin")
