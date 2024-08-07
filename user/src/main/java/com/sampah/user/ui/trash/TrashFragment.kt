@@ -23,6 +23,8 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 
 class TrashFragment : Fragment() {
     private var _binding: FragmentTrashBinding? = null

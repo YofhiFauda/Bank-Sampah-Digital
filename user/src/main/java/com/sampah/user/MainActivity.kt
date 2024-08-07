@@ -61,8 +61,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-        }
-    }
+                }
+            }
 
     private fun setupNavController() {
         val navHostFragment =

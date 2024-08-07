@@ -9,6 +9,7 @@ import com.sampah.user.data.repository.TrashRepository
 import com.sampah.user.datastore.PreferencesHelper
 import com.sampah.user.datastore.dataStore
 
+
 object Injection {
     fun providePreferencesHelper(context: Context): PreferencesHelper {
         return PreferencesHelper(context.dataStore)
@@ -25,7 +26,7 @@ object Injection {
     fun provideProfileRepository(context: Context): ProfileRepository {
         val firebaseAuth = FirebaseAuth.getInstance()
         val firestore = FirebaseFirestore.getInstance()
-        val preferencesHelper = com.sampah.user.di.Injection.providePreferencesHelper(context)
+        val preferencesHelper = providePreferencesHelper(context)
         return ProfileRepository.getInstance(firebaseAuth, firestore, preferencesHelper)
     }
 }
