@@ -2,23 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"
-        tools:ignore="ScopedStorage" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -28,29 +13,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BankSampahDigital"
+        android:theme="@style/ThemeApp"
         tools:targetApi="31">
         <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.profile.DataPribadiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.register.RegistrasiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.welcome.WelcomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
@@ -68,28 +34,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path" />
-        </provider>
-
-        <service
-            android:name=".notifications.StatusMonitoringService"
-            tools:ignore="Instantiatable" />
-
-        <receiver
-            android:name=".notifications.StatusChangeReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.sampah.banksampahdigital.STATUS_CHANGED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/statistic_cardview"
+    app:cardBackgroundColor="@color/soft_blue"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="130dp"
+        android:minHeight="150dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center|bottom">
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_1020"
+            android:layout_marginTop="20dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/total_npengiriman"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

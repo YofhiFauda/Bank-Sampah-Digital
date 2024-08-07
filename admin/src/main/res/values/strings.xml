@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Bank Sampah Digital</string>
+
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="hallo">Hallo,</string>
+    <string name="menu_kategori">Menu Kategori</string>
+    <string name="penjemputan_nsampah">Penjemputan\nSampah</string>
+    <string name="statistik">Statistik</string>
+    <string name="total_npengiriman">Total\nPengiriman</string>
+    <string name="_1020">1020</string>
+</resources>
