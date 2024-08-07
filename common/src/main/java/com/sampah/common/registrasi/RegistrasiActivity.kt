@@ -64,7 +64,8 @@ class RegistrasiActivity : AppCompatActivity() {
                                     val currentUser = firebaseAuth.currentUser
                                     val user = hashMapOf(
                                         "username" to username,
-                                        "email" to email
+                                        "email" to email,
+                                        "role" to "user"
                                         // Tambahkan field tambahan sesuai kebutuhan
                                     )
 

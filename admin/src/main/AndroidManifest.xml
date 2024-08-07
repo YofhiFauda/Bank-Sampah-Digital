@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application>
+        <activity
+            android:name=".ui.riwayatPenukaran.RiwayatPenukaranActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.historySampah.HistorySampahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.settingHadiah.SettingHadiahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.jabatan.JabatanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pekerja.PekerjaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.settingHarga.SettingHargaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.penjemputanSampah.PenjemputanSampahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
 </manifest>

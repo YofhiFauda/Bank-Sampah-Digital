@@ -45,7 +45,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.btnRegistrasi.setOnClickListener {
             val intent = Intent()
-            intent.setClassName(this, "com.sampah.common.RegistrasiActivity")
+            intent.setClassName(this, "com.sampah.common.registrasi.RegistrasiActivity")
             startActivity(intent)
             finish()
         }

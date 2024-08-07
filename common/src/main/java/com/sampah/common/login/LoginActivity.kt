@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val user = auth.currentUser
             if (user != null) {
-                redirectToLoginScreen()
+                redirectToDashboard()
                 Log.e(user.uid, "Success Login UID: ${user.uid}")
             }
         }
@@ -37,13 +37,75 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun redirectToLoginScreen(){
-        val intent = Intent()
-        intent.setClassName(this, "com.sampah.user.MainActivity")
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()
+    private fun redirectToDashboard() {
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            val userRef = firestore.collection("users").document(user.uid)
+            val adminRef = firestore.collection("admin").document(user.uid)
+
+            // Periksa koleksi "users" terlebih dahulu
+            userRef.get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    // Jika ada di koleksi "users"
+                    val intent = Intent()
+                    intent.setClassName(this, "com.sampah.user.MainActivity")
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // Jika tidak ada di koleksi "users", periksa koleksi "admins"
+                    adminRef.get().addOnSuccessListener { adminDocument ->
+                        if (adminDocument.exists()) {
+                            // Jika ada di koleksi "admins"
+                            val intent = Intent()
+                            intent.setClassName(this, "com.sampah.admin.AdminActivity")
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // Jika tidak ditemukan di kedua koleksi
+                            Toast.makeText(this, "User does not exist in either collection", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to get admin data: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }.addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to get user data: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+
+    private fun setupLogin() {
+        binding.btnLogin.setOnClickListener {
+            val email = binding.edLoginEmail.text.toString().trim()
+            val password = binding.edLoginPassword.text.toString().trim()
+
+            when {
+                email.isEmpty() -> {
+                    binding.edLoginEmail.error = resources.getString(R.string.message_validation, "email")
+                }
+                password.isEmpty() -> {
+                    binding.edLoginPassword.error = resources.getString(R.string.message_validation, "password")
+                }
+                else -> {
+                    if (email.isNotEmpty() && password.isNotEmpty()) {
+                        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
+                            if (loginTask.isSuccessful) {
+                                Toast.makeText(this, "Login Success ${loginTask.isSuccessful}", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this, "Login failed: ${loginTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(this, resources.getString(R.string.login_error), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         firebaseAuth.addAuthStateListener(authStateListener)
@@ -58,44 +120,6 @@ class LoginActivity : AppCompatActivity() {
         binding.tvDaftar.setOnClickListener {
             startActivity(Intent(this, RegistrasiActivity::class.java))
             finish()
-        }
-    }
-
-    private fun setupLogin(){
-        binding.btnLogin.setOnClickListener {
-            val email = binding.edLoginEmail.text.toString().trim()
-            val password = binding.edLoginPassword.text.toString().trim()
-
-            when{
-                email.isEmpty() -> {
-                    binding.edLoginEmail.error = resources.getString(R.string.message_validation, "email")
-                }
-                password.isEmpty() -> {
-                    binding.edLoginPassword.error = resources.getString(R.string.message_validation, "password")
-                }
-
-                else -> {
-                    if (email.isNotEmpty() && password.isNotEmpty()){
-                        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { loginTask ->
-                            if (loginTask.isSuccessful) {
-                                val user = firebaseAuth.currentUser
-
-                                if (user != null) {
-                                    firestore.collection("users").document(user.uid).get().addOnCompleteListener { document  ->
-                                        if (document.result.exists()) {
-                                            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-                                        }else {
-                                            Toast.makeText(this@LoginActivity, "Wrong Email or Password", Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        Toast.makeText(this, resources.getString(R.string.login_error), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
         }
     }
 }
