@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Bank Sampah Digital</string>
 
+    <!--  Dashboard  -->
     <string name="username">Username</string>
     <string name="logout">Logout</string>
     <string name="hallo">Hallo,</string>
@@ -9,4 +10,15 @@
     <string name="statistik">Statistik</string>
     <string name="total_npengiriman">Total\nPengiriman</string>
     <string name="_1020">1020</string>
+
+    <!--  Penjemputan Sampah  -->
+    <string name="penjemputan_sampah">Penjemputan Sampah</string>
+    <string name="kategori_sampah">Kategori Sampah</string>
+    <string name="berat_sampah">Berat Sampah</string>
+    <string name="harga_sampah">Harga Sampah</string>
+    <string name="tanggal_penjemputan">Tanggal Penjemputan</string>
+    <string name="alamat_penjemputan">Alamat Penjemputan</string>
+    <string name="catatan">Catatan</string>
+    <string name="simpan">Simpan</string>
+    <string name="title_nama_pengguna">Nama Pengguna</string>
 </resources>
