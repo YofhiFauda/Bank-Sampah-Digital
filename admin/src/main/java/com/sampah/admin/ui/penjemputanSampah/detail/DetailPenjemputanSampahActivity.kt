@@ -59,7 +59,7 @@ class DetailPenjemputanSampahActivity : AppCompatActivity() {
 
         loadStatusOptions()
 
-        binding.appbar.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             val intent = Intent(this, PenjemputanSampahActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
