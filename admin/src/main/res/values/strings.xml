@@ -21,4 +21,10 @@
     <string name="catatan">Catatan</string>
     <string name="simpan">Simpan</string>
     <string name="title_nama_pengguna">Nama Pengguna</string>
+
+    <!--  Setting Harga  -->
+    <string name="setting_harga">Setting Harga</string>
+    <string name="title_jenisSampah">Jenis Sampah</string>
+    <string name="add_setting_harga_sampah">Tambah Seting Harga</string>
+    <string name="edit_setting_harga_sampah">Edit Seting Harga</string>
 </resources>

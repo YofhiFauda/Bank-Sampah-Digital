@@ -6,6 +6,9 @@
 
     <application>
         <activity
+            android:name=".ui.settingHarga.AddEditSettingHargaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.penjemputanSampah.detail.DetailPenjemputanSampahActivity"
             android:exported="false" />
         <activity
